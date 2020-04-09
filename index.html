@@ -179,7 +179,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-04-09 10:39:32" itemprop="dateModified" datetime="2020-04-09T10:39:32+08:00">2020-04-09</time>
+                <time title="修改时间：2020-04-09 10:41:33" itemprop="dateModified" datetime="2020-04-09T10:41:33+08:00">2020-04-09</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -233,13 +233,16 @@
 <ul>
 <li>如上所述重新打包后提交审核8日凌晨通过了审核</li>
 </ul>
-<h3 id="上架后的反馈"><a href="#上架后的反馈" class="headerlink" title="# 上架后的反馈"></a># 上架后的反馈</h3><p>[x] <code>iOS</code> <strong>13.3.1</strong> 点击应用图标闪退，已修复：<br> 产生原因，使用了如下代码：</p>
- <figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">UINavigationBar</span>.appearance().isTranslucent = <span class="literal">false</span></span><br></pre></td></tr></table></figure>
+<h3 id="上架后的反馈"><a href="#上架后的反馈" class="headerlink" title="# 上架后的反馈"></a># 上架后的反馈</h3><ul>
+<li><input checked="" disabled="" type="checkbox"> <p><code>iOS</code> <strong>13.3.1</strong> 点击应用图标闪退，已修复：<br>产生原因，使用了如下代码：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">UINavigationBar</span>.appearance().isTranslucent = <span class="literal">false</span></span><br></pre></td></tr></table></figure>
 
-<p> 参照<a href="https://sarunw.com/posts/uinavigationbar-changes-in-ios13/" target="_blank" rel="noopener">UINavigationBar changes in iOS13</a>修复为如下代码后正常：</p>
- <figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> coloredAppearance = <span class="type">UINavigationBarAppearance</span>()</span><br><span class="line">coloredAppearance.configureWithOpaqueBackground()</span><br><span class="line"><span class="type">UINavigationBar</span>.appearance().standardAppearance = coloredAppearance</span><br></pre></td></tr></table></figure>
-
-<p>[] <code>iOS 13.2.2</code> 上时间线页面点击系统返回按钮闪退，原因未知；</p>
+<p>参照<a href="https://sarunw.com/posts/uinavigationbar-changes-in-ios13/" target="_blank" rel="noopener">UINavigationBar changes in iOS13</a>修复为如下代码后正常：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> coloredAppearance = <span class="type">UINavigationBarAppearance</span>()</span><br><span class="line">coloredAppearance.configureWithOpaqueBackground()</span><br><span class="line"><span class="type">UINavigationBar</span>.appearance().standardAppearance = coloredAppearance</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>iOS 13.2.2</code> 上时间线页面点击系统返回按钮闪退，原因未知；</p>
+</li>
+</ul>
 <p>备注： 不知道为什么线上crash文件并不能通过对应的 <code>dsYM</code> 文件解析出有用的信息，并且目前真机调试 13.2.2 闪退的问题时也不能正确的断点调试😭 </p>
 
       
