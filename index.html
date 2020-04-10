@@ -284,7 +284,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2020-04-10 10:17:05 / 修改时间：13:03:44" itemprop="dateCreated datePublished" datetime="2020-04-10T10:17:05+08:00">2020-04-10</time>
+              <time title="创建时间：2020-04-10 10:17:05 / 修改时间：13:10:27" itemprop="dateCreated datePublished" datetime="2020-04-10T10:17:05+08:00">2020-04-10</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -339,122 +339,63 @@
 <p> <img src="https://github.com/gitKun/ctrip_gird_demo/blob/master/screenshort/step3_add_firstStack.png?raw=true" alt="hotel_stack"></p>
 </li>
 </ol>
-<h3 id="添加第二个背景图片布局"><a href="#添加第二个背景图片布局" class="headerlink" title="# 添加第二个背景图片布局"></a># 添加第二个背景图片布局</h3><ol start="4">
+<ol start="4">
 <li><p>在 <code>Widget _bgImagePositioned(){...</code> 函数下方添加第二列带有背景图的 <code>Stack</code> 布局代码(包括添加左边框):</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">	&#x2F;&#x2F; todo: add imageUrl, imgWidth,title. </span><br><span class="line">	Widget _secondBGImageStack() &#123;</span><br><span class="line">	  return Expanded(</span><br><span class="line">	    child: FractionallySizedBox(</span><br><span class="line">	      widthFactor: 1,</span><br><span class="line">	      heightFactor: 1,</span><br><span class="line">	      child: Container(</span><br><span class="line">	        decoration: BoxDecoration(</span><br><span class="line">	          border: Border(</span><br><span class="line">	            left: _borderSide,</span><br><span class="line">	          ),</span><br><span class="line">	        ),</span><br><span class="line">	        child: Stack(</span><br><span class="line">	          alignment: Alignment.bottomLeft,</span><br><span class="line">	          children: &lt;Widget&gt;[</span><br><span class="line">	            _bgImagePositioned(</span><br><span class="line">	              _minsuBGImageUrl,</span><br><span class="line">	              width: 37,</span><br><span class="line">	            ),</span><br><span class="line">	            _commonTitle(&#39;民宿·客栈&#39;),</span><br><span class="line">	          ],</span><br><span class="line">	        ),</span><br><span class="line">	      ),</span><br><span class="line">	    ),</span><br><span class="line">	    flex: 23,</span><br><span class="line">	  );</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	Widget _commonTitle(String title) &#123;</span><br><span class="line">	  return Center(</span><br><span class="line">	    child: Text(</span><br><span class="line">	      title,</span><br><span class="line">	      style: _titleStyle,</span><br><span class="line">	    ),</span><br><span class="line">	  );</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	&#96;&#96;&#96; </span><br><span class="line"></span><br><span class="line">5. 在 &#96;_hotelRow()&#96;方法的 &#96;&#x2F;&#x2F; todo: add hotel row items&#96; 的下方添加 &#96;_secondBGImageStack(),&#96; , &#96;cmd&#96;+&#96;s&#96; 保存后热更新界面如下：</span><br><span class="line">	</span><br><span class="line">	![民宿](https:&#x2F;&#x2F;github.com&#x2F;gitKun&#x2F;ctrip_gird_demo&#x2F;blob&#x2F;master&#x2F;screenshort&#x2F;step4_minsu.png?raw&#x3D;true) </span><br><span class="line"></span><br><span class="line">6. 添加 &#96;platform&#96; 视图的布局代码，在 &#96;Widget _commonTitle(String title)&#123;...&#96;函数下方添加如下代码：</span><br></pre></td></tr></table></figure>
-<p> Widget _platformBGImageStack() {<br>   return Expanded(</p>
-<pre><code>child: FractionallySizedBox(
-  widthFactor: 1,
-  heightFactor: 1,
-  child: Container(
-    decoration: BoxDecoration(
-      border: Border(
-        left: _borderSide,
-      ),
-      gradient: LinearGradient(colors: _platformColors),
-    ),
-    child: Stack(
-      alignment: Alignment.bottomRight,
-      children: &lt;Widget&gt;[
-        _bgImagePositioned(_platformBGImage, width: 86),
-        _platformTitle(&apos;机票/火车票+酒店 &apos;),
-        // todo: add platform tag
-      ],
-    ),
-  ),
-),
-flex: 46,</code></pre><p>   );<br> }</p>
-<p> Widget _platformTitle(String title) {<br>   return Center(</p>
-<pre><code>child: Text(
-  title,
-  style: _platformStyle,
-),</code></pre><p>   );<br> }</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">在 &#96;_hotelRow()&#96;方法的 &#96;&#x2F;&#x2F; todo: add hotel row items&#96; 下方添加</span><br></pre></td></tr></table></figure>
-<p> _platformBGImageStack(),</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">	</span><br><span class="line">	&#96;cmd&#96;+&#96;s&#96;保存并热跟新后界面如下：</span><br><span class="line">	</span><br><span class="line">	![platform](https:&#x2F;&#x2F;github.com&#x2F;gitKun&#x2F;ctrip_gird_demo&#x2F;blob&#x2F;master&#x2F;screenshort&#x2F;step5_platform.png?raw&#x3D;true)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">7. 实现&#96;方便又便宜&#96;的布局，在 &#96;Widget _platformTitle(String title) &#123;...&#96;函数的下方添加如下代码</span><br></pre></td></tr></table></figure>
-<p> Widget _platformTagTilte(String title) {<br>   return Center(</p>
-<pre><code>child: Padding(
-  padding: EdgeInsets.only(
-    bottom: 32,
-    left: 38,
-  ),
-  child: Container(
-    decoration: BoxDecoration(
-      color: Color(0xfff54c45),
-      borderRadius: BorderRadius.only(
-        topLeft: Radius.circular(7),
-        topRight: Radius.circular(7),
-        bottomRight: Radius.circular(7),
-      ),
-    ),
-    padding: EdgeInsets.fromLTRB(5, 0, 5, 0),
-    child: Text(
-      title,
-      style: TextStyle(
-        color: Color(0xffffffff),
-        fontSize: 12,
-        fontWeight: FontWeight.w600,
-      ),
-    ),
-  ),
-),</code></pre><p>   );<br> }</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">	</span><br><span class="line">	然后将 &#96;&#x2F;&#x2F; todo: add platform tag&#96; 替换为 &#96;_platformTagTilte(&#39;方便又便宜&#39;),&#96; 随后 &#96;cmd&#96;+&#96;s&#96;保存并热跟新后界面效果如下：</span><br><span class="line">	</span><br><span class="line">	![platform_tag](https:&#x2F;&#x2F;github.com&#x2F;gitKun&#x2F;ctrip_gird_demo&#x2F;blob&#x2F;master&#x2F;screenshort&#x2F;step6_platform_tag.png?raw&#x3D;true)</span><br><span class="line">	</span><br><span class="line">至此 &#96;hotel&#96; 行的布局全部完成🎉</span><br><span class="line"></span><br><span class="line">### # 完成 flightRow 和 travelRow</span><br><span class="line"></span><br><span class="line">前面我们已经封装好了 &#96;_firstBGimageStack&#96; 和 &#96;_secondBGImageStack&#96; 函数，这里我们给他们添加必要的参数就能实现背景图和标题的更换，现在开始动手吧：</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">1. 将备注 &#96;&#x2F;&#x2F; todo: add imageUrl, imgWidth,title. &#96; 的 &#96;Widget _firstBGimageStack()&#123;&#96;正行代码，替换为如下：</span><br></pre></td></tr></table></figure>
-<p> Widget _firstBGimageStack({<br>   @required String imageUrl,<br>   double imgWidth = 73,<br>   String title,<br> }) {</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">	</span><br><span class="line">	并将其内部的 &#96;_hotelBGImageUrl&#96; 替换为传入的 &#96;imageUrl&#96;, &#96;37&#96; 替换为传入的 &#96;imgWidth&#96;, &#96;酒店&#96;替换为传入的 &#96;title&#96;, 删除 &#96;&#x2F;&#x2F; todo: add imageUrl, imgWidth,title.&#96; 备注；</span><br><span class="line"></span><br><span class="line">2. 同 &#96;1&#96; 中的操作将备注 &#96;&#x2F;&#x2F; todo: add imageUrl, imgWidth,title. &#96; 的 &#96;Widget _secondBGImageStack() &#123;&#96;正行代码，替换为如下：</span><br></pre></td></tr></table></figure>
-<p> Widget _secondBGImageStack({<br>   @required String imageUrl,<br>   double imgWidth = 37,<br>   String title,<br> }) {</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">	</span><br><span class="line">	并将其内部的 &#96;_minsuBGImageUrl&#96; 替换为传入的 &#96;imageUrl&#96;, &#96;73&#96; 替换为传入的 &#96;imgWidth&#96;, &#96;民宿·客栈&#96;替换为传入的 &#96;title&#96;，删除 &#96;&#x2F;&#x2F; todo: add imageUrl, imgWidth,title.&#96; 备注；</span><br><span class="line"></span><br><span class="line">3. 将 &#96;_hotelRow&#96; 函数内部中调用上述&#96;_firstBGimageStack()&#96;,&#96;_secondBGImageStack()&#96;传入相应参数，修改如下</span><br></pre></td></tr></table></figure>
-<p> _firstBGimageStack(<br>   imageUrl: _hotelBGImageUrl,<br>   title: ‘酒店’,<br> ),<br> _secondBGImageStack(<br>   imageUrl: _minsuBGImageUrl,<br>   title: ‘民宿·客栈’,<br> ),</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">	</span><br><span class="line">	并删除 &#96;&#x2F;&#x2F; todo: add hotel row items&#96; 的备注，然后 &#96;cmd&#96;+&#96;s&#96;保存并热更新后界面应该保持不变；</span><br><span class="line">	</span><br><span class="line">4. 添加无背景图的items布局</span><br></pre></td></tr></table></figure>
-<p> Widget _noBGImageStack({@required String title}) {<br>   return Expanded(</p>
-<pre><code>child: FractionallySizedBox(
-  widthFactor: 1,
-  heightFactor: 1,
-  child: Container(
-    decoration: BoxDecoration(
-      border: Border(
-        left: _borderSide,
-      ),
-    ),
-    child: _commonTitle(title),
-  ),
-),
-flex: 23,</code></pre><p>   );<br> }</p>
-<p> Widget _commonTitle(String title) {<br>   return Center(</p>
-<pre><code>child: Text(
-  title,
-  style: _titleStyle,
-),</code></pre><p>   );<br> }</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">5. 开始替换 &#96;_flightRow()&#96; 中的 &#96;&#x2F;&#x2F; todo: add flight row&#96; 为如下代码;</span><br></pre></td></tr></table></figure>
-<p> child: Row(<br>   children: <Widget>[</p>
-<pre><code>_firstBGimageStack(
-  imageUrl: _flightBGImageUrl,
-  imgWidth: 79,
-  title: &apos;飞机&apos;,
-),
-_secondBGImageStack(
-  imageUrl: _trainBGImage,
-  imgWidth: 37,
-  title: &apos;火车票&apos;,
-),
-_noBGImageStack(title: &apos;汽车·船票&apos;),
-_noBGImageStack(title: &apos;专车·租车&apos;),</code></pre><p>   ],<br> ),</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">	</span><br><span class="line">	然后 &#96;cmd&#96;+&#96;s&#96; 保存并热更新后界面如下：</span><br><span class="line">	</span><br><span class="line">	![flight](https:&#x2F;&#x2F;github.com&#x2F;gitKun&#x2F;ctrip_gird_demo&#x2F;blob&#x2F;master&#x2F;screenshort&#x2F;step7_flight.png?raw&#x3D;true)</span><br><span class="line"></span><br><span class="line">6. 同样替换 &#96;_travelRow&#96; 中的 &#96;&#x2F;&#x2F; todo: add travel row&#96; 为如下代码：</span><br></pre></td></tr></table></figure>
-<p> child: Row(<br>   children: <Widget>[</p>
-<pre><code>_firstBGimageStack(
-  imageUrl: _tripBGImage,
-  imgWidth: 93,
-  title: &apos;旅游&apos;,
-),
-_secondBGImageStack(
-  imageUrl: _dingzhiBGImage,
-  imgWidth: 61,
-  title: &apos;高铁游&apos;,
-),
-_noBGImageStack(title: &apos;邮轮游&apos;),
-_noBGImageStack(title: &apos;定制游&apos;),</code></pre><p>   ],<br> ),</p>
-<pre><code>
-然后 `cmd`+`s` 保存
-</code></pre></li>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; todo: add imageUrl, imgWidth,title. </span><br><span class="line">Widget _secondBGImageStack() &#123;</span><br><span class="line">  return Expanded(</span><br><span class="line">    child: FractionallySizedBox(</span><br><span class="line">      widthFactor: 1,</span><br><span class="line">      heightFactor: 1,</span><br><span class="line">      child: Container(</span><br><span class="line">        decoration: BoxDecoration(</span><br><span class="line">          border: Border(</span><br><span class="line">            left: _borderSide,</span><br><span class="line">          ),</span><br><span class="line">        ),</span><br><span class="line">        child: Stack(</span><br><span class="line">          alignment: Alignment.bottomLeft,</span><br><span class="line">          children: &lt;Widget&gt;[</span><br><span class="line">            _bgImagePositioned(</span><br><span class="line">              _minsuBGImageUrl,</span><br><span class="line">              width: 37,</span><br><span class="line">            ),</span><br><span class="line">            _commonTitle(&#39;民宿·客栈&#39;),</span><br><span class="line">          ],</span><br><span class="line">        ),</span><br><span class="line">      ),</span><br><span class="line">    ),</span><br><span class="line">    flex: 23,</span><br><span class="line">  );</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Widget _commonTitle(String title) &#123;</span><br><span class="line">  return Center(</span><br><span class="line">    child: Text(</span><br><span class="line">      title,</span><br><span class="line">      style: _titleStyle,</span><br><span class="line">    ),</span><br><span class="line">  );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在 <code>_hotelRow()</code>方法的 <code>// todo: add hotel row items</code> 的下方添加 <code>_secondBGImageStack(),</code> , <code>cmd</code>+<code>s</code> 保存后热更新界面如下：</p>
+<p> <img src="https://github.com/gitKun/ctrip_gird_demo/blob/master/screenshort/step4_minsu.png?raw=true" alt="民宿"> </p>
+</li>
+<li><p>添加 <code>platform</code> 视图的布局代码，在 <code>Widget _commonTitle(String title){...</code>函数下方添加如下代码：</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">Widget _platformBGImageStack() &#123;</span><br><span class="line">  return Expanded(</span><br><span class="line">    child: FractionallySizedBox(</span><br><span class="line">      widthFactor: 1,</span><br><span class="line">      heightFactor: 1,</span><br><span class="line">      child: Container(</span><br><span class="line">        decoration: BoxDecoration(</span><br><span class="line">          border: Border(</span><br><span class="line">            left: _borderSide,</span><br><span class="line">          ),</span><br><span class="line">          gradient: LinearGradient(colors: _platformColors),</span><br><span class="line">        ),</span><br><span class="line">        child: Stack(</span><br><span class="line">          alignment: Alignment.bottomRight,</span><br><span class="line">          children: &lt;Widget&gt;[</span><br><span class="line">            _bgImagePositioned(_platformBGImage, width: 86),</span><br><span class="line">            _platformTitle(&#39;机票&#x2F;火车票+酒店 &#39;),</span><br><span class="line">            &#x2F;&#x2F; todo: add platform tag</span><br><span class="line">          ],</span><br><span class="line">        ),</span><br><span class="line">      ),</span><br><span class="line">    ),</span><br><span class="line">    flex: 46,</span><br><span class="line">  );</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Widget _platformTitle(String title) &#123;</span><br><span class="line">  return Center(</span><br><span class="line">    child: Text(</span><br><span class="line">      title,</span><br><span class="line">      style: _platformStyle,</span><br><span class="line">    ),</span><br><span class="line">  );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p> 在 <code>_hotelRow()</code>方法的 <code>// todo: add hotel row items</code> 下方添加</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">_platformBGImageStack(),</span><br></pre></td></tr></table></figure>
+
+<p> <code>cmd</code>+<code>s</code>保存并热跟新后界面如下：</p>
+<p> <img src="https://github.com/gitKun/ctrip_gird_demo/blob/master/screenshort/step5_platform.png?raw=true" alt="platform"></p>
+</li>
+</ol>
+<ol start="7">
+<li><p>实现<code>方便又便宜</code>的布局，在 <code>Widget _platformTitle(String title) {...</code>函数的下方添加如下代码</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">Widget _platformTagTilte(String title) &#123;</span><br><span class="line">  return Center(</span><br><span class="line">    child: Padding(</span><br><span class="line">      padding: EdgeInsets.only(</span><br><span class="line">        bottom: 32,</span><br><span class="line">        left: 38,</span><br><span class="line">      ),</span><br><span class="line">      child: Container(</span><br><span class="line">        decoration: BoxDecoration(</span><br><span class="line">          color: Color(0xfff54c45),</span><br><span class="line">          borderRadius: BorderRadius.only(</span><br><span class="line">            topLeft: Radius.circular(7),</span><br><span class="line">            topRight: Radius.circular(7),</span><br><span class="line">            bottomRight: Radius.circular(7),</span><br><span class="line">          ),</span><br><span class="line">        ),</span><br><span class="line">        padding: EdgeInsets.fromLTRB(5, 0, 5, 0),</span><br><span class="line">        child: Text(</span><br><span class="line">          title,</span><br><span class="line">          style: TextStyle(</span><br><span class="line">            color: Color(0xffffffff),</span><br><span class="line">            fontSize: 12,</span><br><span class="line">            fontWeight: FontWeight.w600,</span><br><span class="line">          ),</span><br><span class="line">        ),</span><br><span class="line">      ),</span><br><span class="line">    ),</span><br><span class="line">  );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p> 然后将 <code>// todo: add platform tag</code> 替换为 <code>_platformTagTilte(&#39;方便又便宜&#39;),</code> 随后 <code>cmd</code>+<code>s</code>保存并热跟新后界面效果如下：</p>
+<p> <img src="https://github.com/gitKun/ctrip_gird_demo/blob/master/screenshort/step6_platform_tag.png?raw=true" alt="platform_tag"></p>
+</li>
+</ol>
+<p>至此 <code>hotel</code> 行的布局全部完成🎉</p>
+<h3 id="完成-flightRow-和-travelRow"><a href="#完成-flightRow-和-travelRow" class="headerlink" title="# 完成 flightRow 和 travelRow"></a># 完成 flightRow 和 travelRow</h3><p>前面我们已经封装好了 <code>_firstBGimageStack</code> 和 <code>_secondBGImageStack</code> 函数，这里我们给他们添加必要的参数就能实现背景图和标题的更换，现在开始动手吧：</p>
+<ol>
+<li><p>将备注 <code>// todo: add imageUrl, imgWidth,title.</code> 的 <code>Widget _firstBGimageStack(){</code>正行代码，替换为如下：</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Widget _firstBGimageStack(&#123;</span><br><span class="line">  @required String imageUrl,</span><br><span class="line">  double imgWidth &#x3D; 73,</span><br><span class="line">  String title,</span><br><span class="line">&#125;) &#123;</span><br></pre></td></tr></table></figure>
+
+<p> 并将其内部的 <code>_hotelBGImageUrl</code> 替换为传入的 <code>imageUrl</code>, <code>37</code> 替换为传入的 <code>imgWidth</code>, <code>酒店</code>替换为传入的 <code>title</code>, 删除 <code>// todo: add imageUrl, imgWidth,title.</code> 备注；</p>
+</li>
+<li><p>同 <code>1</code> 中的操作将备注 <code>// todo: add imageUrl, imgWidth,title.</code> 的 <code>Widget _secondBGImageStack() {</code>正行代码，替换为如下：</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Widget _secondBGImageStack(&#123;</span><br><span class="line">  @required String imageUrl,</span><br><span class="line">  double imgWidth &#x3D; 37,</span><br><span class="line">  String title,</span><br><span class="line">&#125;) &#123;</span><br></pre></td></tr></table></figure>
+
+<p> 并将其内部的 <code>_minsuBGImageUrl</code> 替换为传入的 <code>imageUrl</code>, <code>73</code> 替换为传入的 <code>imgWidth</code>, <code>民宿·客栈</code>替换为传入的 <code>title</code>，删除 <code>// todo: add imageUrl, imgWidth,title.</code> 备注；</p>
+</li>
+<li><p>将 <code>_hotelRow</code> 函数内部中调用上述<code>_firstBGimageStack()</code>,<code>_secondBGImageStack()</code>传入相应参数，修改如下</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">_firstBGimageStack(</span><br><span class="line">  imageUrl: _hotelBGImageUrl,</span><br><span class="line">  title: &#39;酒店&#39;,</span><br><span class="line">),</span><br><span class="line">_secondBGImageStack(</span><br><span class="line">  imageUrl: _minsuBGImageUrl,</span><br><span class="line">  title: &#39;民宿·客栈&#39;,</span><br><span class="line">),</span><br></pre></td></tr></table></figure>
+
+<p> 并删除 <code>// todo: add hotel row items</code> 的备注，然后 <code>cmd</code>+<code>s</code>保存并热更新后界面应该保持不变；</p>
+</li>
+<li><p>添加无背景图的items布局</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">Widget _noBGImageStack(&#123;@required String title&#125;) &#123;</span><br><span class="line">  return Expanded(</span><br><span class="line">    child: FractionallySizedBox(</span><br><span class="line">      widthFactor: 1,</span><br><span class="line">      heightFactor: 1,</span><br><span class="line">      child: Container(</span><br><span class="line">        decoration: BoxDecoration(</span><br><span class="line">          border: Border(</span><br><span class="line">            left: _borderSide,</span><br><span class="line">          ),</span><br><span class="line">        ),</span><br><span class="line">        child: _commonTitle(title),</span><br><span class="line">      ),</span><br><span class="line">    ),</span><br><span class="line">    flex: 23,</span><br><span class="line">  );</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Widget _commonTitle(String title) &#123;</span><br><span class="line">  return Center(</span><br><span class="line">    child: Text(</span><br><span class="line">      title,</span><br><span class="line">      style: _titleStyle,</span><br><span class="line">    ),</span><br><span class="line">  );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>开始替换 <code>_flightRow()</code> 中的 <code>// todo: add flight row</code> 为如下代码;</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">child: Row(</span><br><span class="line">  children: &lt;Widget&gt;[</span><br><span class="line">    _firstBGimageStack(</span><br><span class="line">      imageUrl: _flightBGImageUrl,</span><br><span class="line">      imgWidth: 79,</span><br><span class="line">      title: &#39;飞机&#39;,</span><br><span class="line">    ),</span><br><span class="line">    _secondBGImageStack(</span><br><span class="line">      imageUrl: _trainBGImage,</span><br><span class="line">      imgWidth: 37,</span><br><span class="line">      title: &#39;火车票&#39;,</span><br><span class="line">    ),</span><br><span class="line">    _noBGImageStack(title: &#39;汽车·船票&#39;),</span><br><span class="line">    _noBGImageStack(title: &#39;专车·租车&#39;),</span><br><span class="line">  ],</span><br><span class="line">),</span><br></pre></td></tr></table></figure>
+
+<p> 然后 <code>cmd</code>+<code>s</code> 保存并热更新后界面如下：</p>
+<p> <img src="https://github.com/gitKun/ctrip_gird_demo/blob/master/screenshort/step7_flight.png?raw=true" alt="flight"></p>
+</li>
+<li><p>同样替换 <code>_travelRow</code> 中的 <code>// todo: add travel row</code> 为如下代码：</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">child: Row(</span><br><span class="line">  children: &lt;Widget&gt;[</span><br><span class="line">    _firstBGimageStack(</span><br><span class="line">      imageUrl: _tripBGImage,</span><br><span class="line">      imgWidth: 93,</span><br><span class="line">      title: &#39;旅游&#39;,</span><br><span class="line">    ),</span><br><span class="line">    _secondBGImageStack(</span><br><span class="line">      imageUrl: _dingzhiBGImage,</span><br><span class="line">      imgWidth: 61,</span><br><span class="line">      title: &#39;高铁游&#39;,</span><br><span class="line">    ),</span><br><span class="line">    _noBGImageStack(title: &#39;邮轮游&#39;),</span><br><span class="line">    _noBGImageStack(title: &#39;定制游&#39;),</span><br><span class="line">  ],</span><br><span class="line">),</span><br></pre></td></tr></table></figure>
+
+<p> 然后 <code>cmd</code>+<code>s</code> 保存</p>
+</li>
 </ol>
 <p>至此，本文章全部代码结束，感谢您的阅读，同时希望您能跟着自己动手亲自试验一下；</p>
 <p>附上<a href="https://github.com/gitKun/ctrip_gird_demo" target="_blank" rel="noopener">deom地址</a></p>
