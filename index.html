@@ -15,9 +15,11 @@
 
 <link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
 
+<link rel="stylesheet" href="/js/prism/prism.css">
+
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Muse","version":"7.7.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Pisces","version":"7.7.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
   <meta name="description" content="喜欢新技术，为了更好地自己努力工作！">
@@ -147,117 +149,6 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/10/Flutter%E5%AE%9E%E7%8E%B0%E6%90%BA%E7%A8%8BGirdNav%E5%B8%83%E5%B1%80_%E6%95%B4%E4%BD%93%E5%B8%83%E5%B1%80/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="CodingKun">
-      <meta itemprop="description" content="喜欢新技术，为了更好地自己努力工作！">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="欢迎来到CodingKun的博客">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/04/10/Flutter%E5%AE%9E%E7%8E%B0%E6%90%BA%E7%A8%8BGirdNav%E5%B8%83%E5%B1%80_%E6%95%B4%E4%BD%93%E5%B8%83%E5%B1%80/" class="post-title-link" itemprop="url">手把手教你实现携程GridNav布局-整体布局篇</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2020-04-10 10:17:05 / Modified: 12:43:24" itemprop="dateCreated datePublished" datetime="2020-04-10T10:17:05+08:00">2020-04-10</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Flutter/" itemprop="url" rel="index"><span itemprop="name">Flutter</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="本文收获与价值"><a href="#本文收获与价值" class="headerlink" title="# 本文收获与价值"></a># 本文收获与价值</h3><p>看完本系列文章后你将能够做出如下100%还原<code>携程 V8.22.0</code> 首页 <code>GridNav</code> 的界面：</p>
-<p><img src="https://github.com/gitKun/ctrip_gird_demo/blob/master/screenshort/complete.png?raw=true" alt="完成界面"></p>
-<p>你将使用并熟悉以下<code>Widget</code>:</p>
-<ul>
-<li><p><code>Container</code> 以及 <code>BoxDecoration</code>;</p>
-</li>
-<li><p><code>ClipRRect</code> 以及 <code>BorderRadius</code>;</p>
-</li>
-<li><p><code>Row</code> 与 <code>Expanded</code>;</p>
-</li>
-<li><p><code>Stack</code> 与 <code>Positioned</code>;</p>
-</li>
-<li><p><code>FractionallySizedBox</code>;</p>
-</li>
-</ul>
-<h3 id="准备工作"><a href="#准备工作" class="headerlink" title="# 准备工作"></a># 准备工作</h3><p>开始前请先按照<a href="https://gitkun.github.io/2020/04/10/Flutter%E5%AE%9E%E7%8E%B0%E6%90%BA%E7%A8%8BGirdNav%E5%B8%83%E5%B1%80_%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C/" target="_blank" rel="noopener">Flutter实现携程GirdNav布局_准备工作</a>中的步骤完成准备工作；</p>
-<p>注： 以下全部代码改变都在<code>grid_widget.dart</code>文件中机进行；</p>
-<h3 id="添加整体布局"><a href="#添加整体布局" class="headerlink" title="# 添加整体布局"></a># 添加整体布局</h3><ol>
-<li><p>将 <code>build</code> 函数下方添加如下代码</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line">Widget _hotelRow() &#123;</span><br><span class="line">  return ClipRRect(</span><br><span class="line">    &#x2F;&#x2F; todo: add top corner</span><br><span class="line">    child: Container(</span><br><span class="line">      height: 65,</span><br><span class="line">      decoration: BoxDecoration(</span><br><span class="line">        gradient: LinearGradient(</span><br><span class="line">          colors: _hotelColors,</span><br><span class="line">          stops: [0, 0.54],</span><br><span class="line">        ),</span><br><span class="line">      ),</span><br><span class="line">      &#x2F;&#x2F; todo: add hotel row</span><br><span class="line">    ),</span><br><span class="line">  );</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Widget _flightRow() &#123;</span><br><span class="line">  return Container(</span><br><span class="line">    height: 65,</span><br><span class="line">    decoration: BoxDecoration(</span><br><span class="line">      gradient: LinearGradient(</span><br><span class="line">        colors: _flightColors,</span><br><span class="line">        stops: [0, 0.54],</span><br><span class="line">      ),</span><br><span class="line">      &#x2F;&#x2F; todo: add top border </span><br><span class="line">    ),</span><br><span class="line">    &#x2F;&#x2F; todo: add flight row</span><br><span class="line">  );</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Widget _travelRow() &#123;</span><br><span class="line">  return ClipRRect(</span><br><span class="line">    &#x2F;&#x2F; todo: add bottom corner</span><br><span class="line">    child: Container(</span><br><span class="line">      height: 65,</span><br><span class="line">      decoration: BoxDecoration(</span><br><span class="line">        gradient: LinearGradient(</span><br><span class="line">          colors: _travelColors,</span><br><span class="line">          stops: [0, 0.54],</span><br><span class="line">        ),</span><br><span class="line">        &#x2F;&#x2F; todo: add top border </span><br><span class="line">      ),</span><br><span class="line">      &#x2F;&#x2F; todo: add travel row</span><br><span class="line">    ),</span><br><span class="line">  );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p> ⚠️<strong>注意</strong>是:<code>ClipRRect</code>⚠️</p>
-</li>
-<li><p>将 <code>build</code> 函数中的</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; todo: add grid rows</span><br><span class="line">return Container();</span><br></pre></td></tr></table></figure>
-
-<p> 替换为：</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">return Column(</span><br><span class="line">  children: &lt;Widget&gt;[</span><br><span class="line">	_hotelRow(),</span><br><span class="line">	_flightRow(),</span><br><span class="line">	_travelRow(),</span><br><span class="line">  ],</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
-
-<p> <code>F5</code>运行到模拟器,查看</p>
-<p> <img src="https://github.com/gitKun/ctrip_gird_demo/blob/master/screenshort/step1.png?raw=true" alt="column布局"></p>
-</li>
-<li><p>添加<code>corner</code>和<code>border</code>:</p>
-<p> 将 <code>// todo: add top corner</code> 替换为：</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">borderRadius: BorderRadius.only(</span><br><span class="line">  topLeft: const Radius.circular(8),</span><br><span class="line">  topRight: const Radius.circular(8),</span><br><span class="line">),</span><br></pre></td></tr></table></figure>
-<p> 将 <code>// todo: add bottom corner</code> 替换为：</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">borderRadius: BorderRadius.only(</span><br><span class="line">  bottomLeft: const Radius.circular(8),</span><br><span class="line">  bottomRight: const Radius.circular(8),</span><br><span class="line">),</span><br></pre></td></tr></table></figure>
-<p> 将两处 <code>// todo: add top border</code> 替换为：</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">border: Border(</span><br><span class="line">  top: _borderSide,</span><br><span class="line">),</span><br></pre></td></tr></table></figure>
-<p> 然后 <code>cmd</code> + <code>s</code> 保存更改后界面将会热更新如下：</p>
-<p> <img src="https://github.com/gitKun/ctrip_gird_demo/blob/master/screenshort/step2_cornenr_border.png?raw=true" alt="圆角和边框"></p>
-</li>
-</ol>
-<p>至此，整体页面布局已经结束；</p>
-<p>接下来请移步： <a href="https://gitkun.github.io/2020/04/10/Flutter%E5%AE%9E%E7%8E%B0%E6%90%BA%E7%A8%8BGirdNav%E5%B8%83%E5%B1%80_hotel%E5%B8%83%E5%B1%80/" target="_blank" rel="noopener">Flutter实现携程GirdNav布局_hotel布局</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/10/Flutter%E5%AE%9E%E7%8E%B0%E6%90%BA%E7%A8%8BGirdNav%E5%B8%83%E5%B1%80_hotel%E5%B8%83%E5%B1%80/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -283,7 +174,7 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2020-04-10 10:17:05 / Modified: 13:10:27" itemprop="dateCreated datePublished" datetime="2020-04-10T10:17:05+08:00">2020-04-10</time>
+              <time title="Created: 2020-04-10 12:27:22 / Modified: 14:34:57" itemprop="dateCreated datePublished" datetime="2020-04-10T12:27:22+08:00">2020-04-10</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -307,98 +198,91 @@
 
       
           <h3 id="本文收获与价值"><a href="#本文收获与价值" class="headerlink" title="# 本文收获与价值"></a># 本文收获与价值</h3><p>看完本系列文章后你将能够做出如下100%还原<code>携程 V8.22.0</code> 首页 <code>GridNav</code> 的界面：</p>
-<p><img src="https://github.com/gitKun/ctrip_gird_demo/blob/master/screenshort/complete.png?raw=true" alt="完成界面"></p>
-<h3 id="准备工作"><a href="#准备工作" class="headerlink" title="# 准备工作"></a># 准备工作</h3><p>开始前请</p>
-<ol>
-<li><p>按照<a href="https://gitkun.github.io/2020/04/10/Flutter%E5%AE%9E%E7%8E%B0%E6%90%BA%E7%A8%8BGirdNav%E5%B8%83%E5%B1%80_%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C/" target="_blank" rel="noopener">Flutter实现携程GirdNav布局_准备工作</a>中的步骤完成准备工作；</p>
-</li>
-<li><p>按照<a href="https://gitkun.github.io/2020/04/10/Flutter%E5%AE%9E%E7%8E%B0%E6%90%BA%E7%A8%8BGirdNav%E5%B8%83%E5%B1%80_%E6%95%B4%E4%BD%93%E5%B8%83%E5%B1%80/" target="_blank" rel="noopener">Flutter实现携程GirdNav布局_整体布局</a>中添加相关代码；</p>
-</li>
-</ol>
-<p>注： 以下全部代码改变都在<code>grid_widget.dart</code>文件中机进行；</p>
-<h3 id="实现hotel行的布局"><a href="#实现hotel行的布局" class="headerlink" title="# 实现hotel行的布局"></a># 实现hotel行的布局</h3><ol>
-<li><p>将 <code>// todo: add hotel row</code> 替换为</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">child: Row(</span><br><span class="line">  children: &lt;Widget&gt;[</span><br><span class="line">    &#x2F;&#x2F; todo: add hotel row items</span><br><span class="line">  ],</span><br><span class="line">),</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>在 <code>Widget _travelRow(){...</code> 函数下面添加如下代码实现</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; todo: add imageUrl, imgWidth,title. </span><br><span class="line">Widget _firstBGimageStack() &#123;</span><br><span class="line">  return Expanded(</span><br><span class="line">    child: FractionallySizedBox(</span><br><span class="line">      widthFactor: 1,</span><br><span class="line">      heightFactor: 1,</span><br><span class="line">      child: Stack(</span><br><span class="line">        alignment: Alignment.bottomRight,</span><br><span class="line">        children: &lt;Widget&gt;[</span><br><span class="line">          _bgImagePositioned(</span><br><span class="line">            _hotelBGImageUrl,</span><br><span class="line">            width: imgWidth,</span><br><span class="line">          ),</span><br><span class="line">          _firstTitlePositioned(&#39;酒店&#39;),</span><br><span class="line">        ],</span><br><span class="line">      ),</span><br><span class="line">    ),</span><br><span class="line">    flex: 31,</span><br><span class="line">  );</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Widget _firstTitlePositioned(String title) &#123;</span><br><span class="line">  return Positioned(</span><br><span class="line">    left: 15,</span><br><span class="line">    top: 25,</span><br><span class="line">    child: Text(</span><br><span class="line">      title,</span><br><span class="line">      style: _titleStyle,</span><br><span class="line">    ),</span><br><span class="line">  );</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Widget _bgImagePositioned(String imageUrl, &#123;double width &#x3D; 73&#125;) &#123;</span><br><span class="line">  return Positioned(</span><br><span class="line">    child: Image.network(</span><br><span class="line">      imageUrl,</span><br><span class="line">      width: width,</span><br><span class="line">      fit: BoxFit.fill,</span><br><span class="line">    ),</span><br><span class="line">  );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<img width=375 src="https://github.com/gitKun/ctrip_gird_demo/blob/master/screenshort/complete.png?raw=true" />
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/04/10/Flutter%E5%AE%9E%E7%8E%B0%E6%90%BA%E7%A8%8BGirdNav%E5%B8%83%E5%B1%80_hotel%E5%B8%83%E5%B1%80/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
 
-<p> <strong>注意：</strong></p>
-<ul>
-<li><p><code>_firstBGimageStack</code> 中的 <code>flex: 31</code> 是根据网页端的<code>flex</code>布局的比例来的，下文中 <code>flex: 23</code> 和 <code>flex 46</code> 等均是如此；</p>
-</li>
-<li><p><code>FractionallySizedBox(widthFactor: 1,heightFactor: 1)</code>是用来撑满父节点整个布局空间用的，<code>widthFactor: 1</code> 代表比例表示占满宽, <code>heightFactor: 1</code>表示占满高度；</p>
-</li>
-</ul>
-</li>
-<li><p>将如下代码添加到 <code>// todo: add hotel row items</code> 的下方</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">_firstBGimageStack(),</span><br></pre></td></tr></table></figure>
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
 
-<p> 保存更改<code>cmd</code>+<code>s</code>,界面热更新如下</p>
-<p> <img src="https://github.com/gitKun/ctrip_gird_demo/blob/master/screenshort/step3_add_firstStack.png?raw=true" alt="hotel_stack"></p>
-</li>
-</ol>
-<ol start="4">
-<li><p>在 <code>Widget _bgImagePositioned(){...</code> 函数下方添加第二列带有背景图的 <code>Stack</code> 布局代码(包括添加左边框):</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; todo: add imageUrl, imgWidth,title. </span><br><span class="line">Widget _secondBGImageStack() &#123;</span><br><span class="line">  return Expanded(</span><br><span class="line">    child: FractionallySizedBox(</span><br><span class="line">      widthFactor: 1,</span><br><span class="line">      heightFactor: 1,</span><br><span class="line">      child: Container(</span><br><span class="line">        decoration: BoxDecoration(</span><br><span class="line">          border: Border(</span><br><span class="line">            left: _borderSide,</span><br><span class="line">          ),</span><br><span class="line">        ),</span><br><span class="line">        child: Stack(</span><br><span class="line">          alignment: Alignment.bottomLeft,</span><br><span class="line">          children: &lt;Widget&gt;[</span><br><span class="line">            _bgImagePositioned(</span><br><span class="line">              _minsuBGImageUrl,</span><br><span class="line">              width: 37,</span><br><span class="line">            ),</span><br><span class="line">            _commonTitle(&#39;民宿·客栈&#39;),</span><br><span class="line">          ],</span><br><span class="line">        ),</span><br><span class="line">      ),</span><br><span class="line">    ),</span><br><span class="line">    flex: 23,</span><br><span class="line">  );</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Widget _commonTitle(String title) &#123;</span><br><span class="line">  return Center(</span><br><span class="line">    child: Text(</span><br><span class="line">      title,</span><br><span class="line">      style: _titleStyle,</span><br><span class="line">    ),</span><br><span class="line">  );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>在 <code>_hotelRow()</code>方法的 <code>// todo: add hotel row items</code> 的下方添加 <code>_secondBGImageStack(),</code> , <code>cmd</code>+<code>s</code> 保存后热更新界面如下：</p>
-<p> <img src="https://github.com/gitKun/ctrip_gird_demo/blob/master/screenshort/step4_minsu.png?raw=true" alt="民宿"> </p>
-</li>
-<li><p>添加 <code>platform</code> 视图的布局代码，在 <code>Widget _commonTitle(String title){...</code>函数下方添加如下代码：</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">Widget _platformBGImageStack() &#123;</span><br><span class="line">  return Expanded(</span><br><span class="line">    child: FractionallySizedBox(</span><br><span class="line">      widthFactor: 1,</span><br><span class="line">      heightFactor: 1,</span><br><span class="line">      child: Container(</span><br><span class="line">        decoration: BoxDecoration(</span><br><span class="line">          border: Border(</span><br><span class="line">            left: _borderSide,</span><br><span class="line">          ),</span><br><span class="line">          gradient: LinearGradient(colors: _platformColors),</span><br><span class="line">        ),</span><br><span class="line">        child: Stack(</span><br><span class="line">          alignment: Alignment.bottomRight,</span><br><span class="line">          children: &lt;Widget&gt;[</span><br><span class="line">            _bgImagePositioned(_platformBGImage, width: 86),</span><br><span class="line">            _platformTitle(&#39;机票&#x2F;火车票+酒店 &#39;),</span><br><span class="line">            &#x2F;&#x2F; todo: add platform tag</span><br><span class="line">          ],</span><br><span class="line">        ),</span><br><span class="line">      ),</span><br><span class="line">    ),</span><br><span class="line">    flex: 46,</span><br><span class="line">  );</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Widget _platformTitle(String title) &#123;</span><br><span class="line">  return Center(</span><br><span class="line">    child: Text(</span><br><span class="line">      title,</span><br><span class="line">      style: _platformStyle,</span><br><span class="line">    ),</span><br><span class="line">  );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/10/Flutter%E5%AE%9E%E7%8E%B0%E6%90%BA%E7%A8%8BGirdNav%E5%B8%83%E5%B1%80_%E6%95%B4%E4%BD%93%E5%B8%83%E5%B1%80/">
 
-<p> 在 <code>_hotelRow()</code>方法的 <code>// todo: add hotel row items</code> 下方添加</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">_platformBGImageStack(),</span><br></pre></td></tr></table></figure>
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="CodingKun">
+      <meta itemprop="description" content="喜欢新技术，为了更好地自己努力工作！">
+    </span>
 
-<p> <code>cmd</code>+<code>s</code>保存并热跟新后界面如下：</p>
-<p> <img src="https://github.com/gitKun/ctrip_gird_demo/blob/master/screenshort/step5_platform.png?raw=true" alt="platform"></p>
-</li>
-</ol>
-<ol start="7">
-<li><p>实现<code>方便又便宜</code>的布局，在 <code>Widget _platformTitle(String title) {...</code>函数的下方添加如下代码</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">Widget _platformTagTilte(String title) &#123;</span><br><span class="line">  return Center(</span><br><span class="line">    child: Padding(</span><br><span class="line">      padding: EdgeInsets.only(</span><br><span class="line">        bottom: 32,</span><br><span class="line">        left: 38,</span><br><span class="line">      ),</span><br><span class="line">      child: Container(</span><br><span class="line">        decoration: BoxDecoration(</span><br><span class="line">          color: Color(0xfff54c45),</span><br><span class="line">          borderRadius: BorderRadius.only(</span><br><span class="line">            topLeft: Radius.circular(7),</span><br><span class="line">            topRight: Radius.circular(7),</span><br><span class="line">            bottomRight: Radius.circular(7),</span><br><span class="line">          ),</span><br><span class="line">        ),</span><br><span class="line">        padding: EdgeInsets.fromLTRB(5, 0, 5, 0),</span><br><span class="line">        child: Text(</span><br><span class="line">          title,</span><br><span class="line">          style: TextStyle(</span><br><span class="line">            color: Color(0xffffffff),</span><br><span class="line">            fontSize: 12,</span><br><span class="line">            fontWeight: FontWeight.w600,</span><br><span class="line">          ),</span><br><span class="line">        ),</span><br><span class="line">      ),</span><br><span class="line">    ),</span><br><span class="line">  );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="欢迎来到CodingKun的博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/04/10/Flutter%E5%AE%9E%E7%8E%B0%E6%90%BA%E7%A8%8BGirdNav%E5%B8%83%E5%B1%80_%E6%95%B4%E4%BD%93%E5%B8%83%E5%B1%80/" class="post-title-link" itemprop="url">手把手教你实现携程GridNav布局-整体布局篇</a>
+        </h1>
 
-<p> 然后将 <code>// todo: add platform tag</code> 替换为 <code>_platformTagTilte(&#39;方便又便宜&#39;),</code> 随后 <code>cmd</code>+<code>s</code>保存并热跟新后界面效果如下：</p>
-<p> <img src="https://github.com/gitKun/ctrip_gird_demo/blob/master/screenshort/step6_platform_tag.png?raw=true" alt="platform_tag"></p>
-</li>
-</ol>
-<p>至此 <code>hotel</code> 行的布局全部完成🎉</p>
-<h3 id="完成-flightRow-和-travelRow"><a href="#完成-flightRow-和-travelRow" class="headerlink" title="# 完成 flightRow 和 travelRow"></a># 完成 flightRow 和 travelRow</h3><p>前面我们已经封装好了 <code>_firstBGimageStack</code> 和 <code>_secondBGImageStack</code> 函数，这里我们给他们添加必要的参数就能实现背景图和标题的更换，现在开始动手吧：</p>
-<ol>
-<li><p>将备注 <code>// todo: add imageUrl, imgWidth,title.</code> 的 <code>Widget _firstBGimageStack(){</code>正行代码，替换为如下：</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Widget _firstBGimageStack(&#123;</span><br><span class="line">  @required String imageUrl,</span><br><span class="line">  double imgWidth &#x3D; 73,</span><br><span class="line">  String title,</span><br><span class="line">&#125;) &#123;</span><br></pre></td></tr></table></figure>
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
 
-<p> 并将其内部的 <code>_hotelBGImageUrl</code> 替换为传入的 <code>imageUrl</code>, <code>37</code> 替换为传入的 <code>imgWidth</code>, <code>酒店</code>替换为传入的 <code>title</code>, 删除 <code>// todo: add imageUrl, imgWidth,title.</code> 备注；</p>
-</li>
-<li><p>同 <code>1</code> 中的操作将备注 <code>// todo: add imageUrl, imgWidth,title.</code> 的 <code>Widget _secondBGImageStack() {</code>正行代码，替换为如下：</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Widget _secondBGImageStack(&#123;</span><br><span class="line">  @required String imageUrl,</span><br><span class="line">  double imgWidth &#x3D; 37,</span><br><span class="line">  String title,</span><br><span class="line">&#125;) &#123;</span><br></pre></td></tr></table></figure>
+              <time title="Created: 2020-04-10 10:17:05 / Modified: 14:32:54" itemprop="dateCreated datePublished" datetime="2020-04-10T10:17:05+08:00">2020-04-10</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Flutter/" itemprop="url" rel="index"><span itemprop="name">Flutter</span></a>
+                </span>
+            </span>
 
-<p> 并将其内部的 <code>_minsuBGImageUrl</code> 替换为传入的 <code>imageUrl</code>, <code>73</code> 替换为传入的 <code>imgWidth</code>, <code>民宿·客栈</code>替换为传入的 <code>title</code>，删除 <code>// todo: add imageUrl, imgWidth,title.</code> 备注；</p>
-</li>
-<li><p>将 <code>_hotelRow</code> 函数内部中调用上述<code>_firstBGimageStack()</code>,<code>_secondBGImageStack()</code>传入相应参数，修改如下</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">_firstBGimageStack(</span><br><span class="line">  imageUrl: _hotelBGImageUrl,</span><br><span class="line">  title: &#39;酒店&#39;,</span><br><span class="line">),</span><br><span class="line">_secondBGImageStack(</span><br><span class="line">  imageUrl: _minsuBGImageUrl,</span><br><span class="line">  title: &#39;民宿·客栈&#39;,</span><br><span class="line">),</span><br></pre></td></tr></table></figure>
+          
 
-<p> 并删除 <code>// todo: add hotel row items</code> 的备注，然后 <code>cmd</code>+<code>s</code>保存并热更新后界面应该保持不变；</p>
-</li>
-<li><p>添加无背景图的items布局</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">Widget _noBGImageStack(&#123;@required String title&#125;) &#123;</span><br><span class="line">  return Expanded(</span><br><span class="line">    child: FractionallySizedBox(</span><br><span class="line">      widthFactor: 1,</span><br><span class="line">      heightFactor: 1,</span><br><span class="line">      child: Container(</span><br><span class="line">        decoration: BoxDecoration(</span><br><span class="line">          border: Border(</span><br><span class="line">            left: _borderSide,</span><br><span class="line">          ),</span><br><span class="line">        ),</span><br><span class="line">        child: _commonTitle(title),</span><br><span class="line">      ),</span><br><span class="line">    ),</span><br><span class="line">    flex: 23,</span><br><span class="line">  );</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Widget _commonTitle(String title) &#123;</span><br><span class="line">  return Center(</span><br><span class="line">    child: Text(</span><br><span class="line">      title,</span><br><span class="line">      style: _titleStyle,</span><br><span class="line">    ),</span><br><span class="line">  );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>开始替换 <code>_flightRow()</code> 中的 <code>// todo: add flight row</code> 为如下代码;</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">child: Row(</span><br><span class="line">  children: &lt;Widget&gt;[</span><br><span class="line">    _firstBGimageStack(</span><br><span class="line">      imageUrl: _flightBGImageUrl,</span><br><span class="line">      imgWidth: 79,</span><br><span class="line">      title: &#39;飞机&#39;,</span><br><span class="line">    ),</span><br><span class="line">    _secondBGImageStack(</span><br><span class="line">      imageUrl: _trainBGImage,</span><br><span class="line">      imgWidth: 37,</span><br><span class="line">      title: &#39;火车票&#39;,</span><br><span class="line">    ),</span><br><span class="line">    _noBGImageStack(title: &#39;汽车·船票&#39;),</span><br><span class="line">    _noBGImageStack(title: &#39;专车·租车&#39;),</span><br><span class="line">  ],</span><br><span class="line">),</span><br></pre></td></tr></table></figure>
+        </div>
+      </header>
 
-<p> 然后 <code>cmd</code>+<code>s</code> 保存并热更新后界面如下：</p>
-<p> <img src="https://github.com/gitKun/ctrip_gird_demo/blob/master/screenshort/step7_flight.png?raw=true" alt="flight"></p>
-</li>
-<li><p>同样替换 <code>_travelRow</code> 中的 <code>// todo: add travel row</code> 为如下代码：</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">child: Row(</span><br><span class="line">  children: &lt;Widget&gt;[</span><br><span class="line">    _firstBGimageStack(</span><br><span class="line">      imageUrl: _tripBGImage,</span><br><span class="line">      imgWidth: 93,</span><br><span class="line">      title: &#39;旅游&#39;,</span><br><span class="line">    ),</span><br><span class="line">    _secondBGImageStack(</span><br><span class="line">      imageUrl: _dingzhiBGImage,</span><br><span class="line">      imgWidth: 61,</span><br><span class="line">      title: &#39;高铁游&#39;,</span><br><span class="line">    ),</span><br><span class="line">    _noBGImageStack(title: &#39;邮轮游&#39;),</span><br><span class="line">    _noBGImageStack(title: &#39;定制游&#39;),</span><br><span class="line">  ],</span><br><span class="line">),</span><br></pre></td></tr></table></figure>
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
-<p> 然后 <code>cmd</code>+<code>s</code> 保存</p>
-</li>
-</ol>
-<p>至此，本文章全部代码结束，感谢您的阅读，同时希望您能跟着自己动手亲自试验一下；</p>
-<p>附上<a href="https://github.com/gitKun/ctrip_gird_demo" target="_blank" rel="noopener">deom地址</a></p>
-
+      
+          <h3 id="本文收获与价值"><a href="#本文收获与价值" class="headerlink" title="# 本文收获与价值"></a># 本文收获与价值</h3><p>看完本系列文章后你将能够做出如下100%还原<code>携程 V8.22.0</code> 首页 <code>GridNav</code> 的界面：</p>
+<img width=375 src="https://github.com/gitKun/ctrip_gird_demo/blob/master/screenshort/complete.png?raw=true" />
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/04/10/Flutter%E5%AE%9E%E7%8E%B0%E6%90%BA%E7%A8%8BGirdNav%E5%B8%83%E5%B1%80_%E6%95%B4%E4%BD%93%E5%B8%83%E5%B1%80/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -442,7 +326,7 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2020-04-10 07:57:35 / Modified: 12:41:07" itemprop="dateCreated datePublished" datetime="2020-04-10T07:57:35+08:00">2020-04-10</time>
+              <time title="Created: 2020-04-10 07:57:35 / Modified: 14:33:40" itemprop="dateCreated datePublished" datetime="2020-04-10T07:57:35+08:00">2020-04-10</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -466,50 +350,15 @@
 
       
           <h3 id="本文收获与价值"><a href="#本文收获与价值" class="headerlink" title="# 本文收获与价值"></a># 本文收获与价值</h3><p>看完本系列文章后你将能够做出如下100%还原<code>携程 V8.22.0</code> 首页 <code>GridNav</code> 的界面：</p>
-<p><img src="https://github.com/gitKun/ctrip_gird_demo/blob/master/screenshort/complete.png?raw=true" alt="完成界面"></p>
-<p>你将使用并熟悉以下<code>Widget</code>:</p>
-<ul>
-<li><p><code>Container</code> 以及 <code>BoxDecoration</code>;</p>
-</li>
-<li><p><code>ClipRRect</code> 以及 <code>BorderRadius</code>;</p>
-</li>
-<li><p><code>Row</code> 与 <code>Expanded</code>;</p>
-</li>
-<li><p><code>Stack</code> 与 <code>Positioned</code>;</p>
-</li>
-<li><p><code>FractionallySizedBox</code>;</p>
-</li>
-</ul>
-<h3 id="准备工作"><a href="#准备工作" class="headerlink" title="# 准备工作"></a># 准备工作</h3><ul>
-<li><p>本文需要你有<code>Flutter</code>的基本知识，文中不会过多介绍各种<code>Widget</code>的具体功能；</p>
-</li>
-<li><p>如果您熟悉或者会使用<code>Chrome</code>进行<code>H5</code>界面调试的话最好不过，没有的话也不影响，我已经将你所需要的全部资源放在了代码中；</p>
-</li>
-</ul>
-<p>好了让我们开始准备工作吧：</p>
-<ol>
-<li><p><code>Chorme</code>打开一个新页面，按 <code>F12</code> 进入调试状态，地址栏输入<code>http://m.ctrip.com/html5/</code>，回车，你将会看到如下界面：</p>
-<p> <img src="https://github.com/gitKun/ctrip_gird_demo/blob/master/screenshort/ctrip_H5.png?raw=true" alt="ctrip_H5"></p>
-<p>现在你可以查看<code>携程 H5</code> 页面的各种布局和颜色，字体等的配置了(这里不是重点: 相关配置已贴在代码中)；</p>
-</li>
-</ol>
-<ol start="2">
-<li>新建名为<code>ctrip_gird_demo</code>的<code>Flutter</code>工程，我这里使用的是 <code>VSCode</code> ，因为 <code>Android Studio 3.6.2</code> 在我电脑上实在太卡了，各种办法都试了，还是解决不掉<strong>卡顿</strong> 和 <strong>CPU占用超高</strong>；</li>
-</ol>
-<ol start="3">
-<li><p>在 <code>main.dart</code> 中删除全部代码，并添加如下代码；</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">import &#39;package:flutter&#x2F;material.dart&#39;;</span><br><span class="line"></span><br><span class="line">void main() &#x3D;&gt; runApp(CtripGridApp());</span><br><span class="line"></span><br><span class="line">class CtripGridApp extends StatelessWidget &#123;</span><br><span class="line">  @override</span><br><span class="line">  Widget build(BuildContext context) &#123;</span><br><span class="line">    return MaterialApp(</span><br><span class="line">      title: &#39;Flutter Demo&#39;,</span><br><span class="line">      theme: ThemeData(</span><br><span class="line">        primarySwatch: Colors.blue,</span><br><span class="line">      ),</span><br><span class="line">      home: Scaffold(</span><br><span class="line">        appBar: AppBar(</span><br><span class="line">          title: Text(</span><br><span class="line">            &quot;携程grid布局&quot;,</span><br><span class="line">            style: TextStyle(fontSize: 18),</span><br><span class="line">          ),</span><br><span class="line">        ),</span><br><span class="line">        body: Container(</span><br><span class="line">          padding: EdgeInsets.only(top: 146),</span><br><span class="line">          margin: EdgeInsets.only(left: 16, right: 16),</span><br><span class="line">          &#x2F;&#x2F; todo: add girdWidget</span><br><span class="line">        ),</span><br><span class="line">      ),</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>新建名为 <code>grid_widget.dart</code> 的文件，并添加我们在<code>1</code>中获得颜色，背景图，字体等的配置代码；</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br></pre></td><td class="code"><pre><span class="line">import &#39;package:flutter&#x2F;material.dart&#39;;</span><br><span class="line"></span><br><span class="line">class GridWidget extends StatelessWidget &#123;</span><br><span class="line"></span><br><span class="line">  final List&lt;Color&gt; _hotelColors &#x3D; [</span><br><span class="line">    Color(0xfffa5956),</span><br><span class="line">    Color(0xfffb8650),</span><br><span class="line">  ];</span><br><span class="line"></span><br><span class="line">  final List&lt;Color&gt; _platformColors &#x3D; [</span><br><span class="line">    Color(0xffffbc49),</span><br><span class="line">    Color(0xffffd252),</span><br><span class="line">  ];</span><br><span class="line">  </span><br><span class="line">  final List&lt;Color&gt; _flightColors &#x3D; [</span><br><span class="line">    Color(0xff4b8fed),</span><br><span class="line">    Color(0xff53bced),</span><br><span class="line">  ];</span><br><span class="line">  </span><br><span class="line">  final List&lt;Color&gt; _travelColors &#x3D; [</span><br><span class="line">    Color(0xff34c2aa),</span><br><span class="line">    Color(0xff6cd557),</span><br><span class="line">  ];</span><br><span class="line"></span><br><span class="line">  final String _hotelBGImageUrl &#x3D;</span><br><span class="line">      &#39;https:&#x2F;&#x2F;pic.c-ctrip.com&#x2F;platform&#x2F;h5&#x2F;home&#x2F;grid-nav-items-hotel@v7.15.png&#39;;</span><br><span class="line">      </span><br><span class="line">  final String _minsuBGImageUrl &#x3D;</span><br><span class="line">      &#39;https:&#x2F;&#x2F;pic.c-ctrip.com&#x2F;platform&#x2F;h5&#x2F;home&#x2F;grid-nav-items-minsu@v7.15.png&#39;;</span><br><span class="line">      </span><br><span class="line">  final String _platformBGImage &#x3D;</span><br><span class="line">      &#39;https:&#x2F;&#x2F;pic.c-ctrip.com&#x2F;platform&#x2F;h5&#x2F;home&#x2F;grid-nav-items-jhj@v7.15.png&#39;;</span><br><span class="line">      </span><br><span class="line">  final String _flightBGImageUrl &#x3D;</span><br><span class="line">      &#39;https:&#x2F;&#x2F;pic.c-ctrip.com&#x2F;platform&#x2F;h5&#x2F;home&#x2F;grid-nav-items-flight@v7.15.png&#39;;</span><br><span class="line">      </span><br><span class="line">  final String _trainBGImage &#x3D;</span><br><span class="line">      &#39;https:&#x2F;&#x2F;pic.c-ctrip.com&#x2F;platform&#x2F;h5&#x2F;home&#x2F;grid-nav-items-train.png&#39;;</span><br><span class="line">      </span><br><span class="line">  final String _tripBGImage &#x3D;</span><br><span class="line">      &#39;https:&#x2F;&#x2F;pic.c-ctrip.com&#x2F;platform&#x2F;h5&#x2F;home&#x2F;grid-nav-items-travel@v7.15.png&#39;;</span><br><span class="line">      </span><br><span class="line">  final String _dingzhiBGImage &#x3D;</span><br><span class="line">      &#39;https:&#x2F;&#x2F;pic.c-ctrip.com&#x2F;platform&#x2F;h5&#x2F;home&#x2F;grid-nav-items-dingzhi@v7.15.png&#39;;</span><br><span class="line"></span><br><span class="line">  final TextStyle _titleStyle &#x3D; TextStyle(</span><br><span class="line">    color: Colors.white,</span><br><span class="line">    fontSize: 14,</span><br><span class="line">    fontWeight: FontWeight.w600,</span><br><span class="line">  );</span><br><span class="line"></span><br><span class="line">  final TextStyle _platformStyle &#x3D; TextStyle(</span><br><span class="line">    color: Color(0xffa05416),</span><br><span class="line">    fontSize: 14,</span><br><span class="line">    fontWeight: FontWeight.w600,</span><br><span class="line">  );</span><br><span class="line"></span><br><span class="line">  final BorderSide _borderSide &#x3D; BorderSide(</span><br><span class="line">    color: Color(0xfff2f2f2),</span><br><span class="line">    width: 1,</span><br><span class="line">  );</span><br><span class="line">  </span><br><span class="line">  final Radius _radius &#x3D; Radius.circular(8);</span><br><span class="line"></span><br><span class="line">  @override</span><br><span class="line">  Widget build(BuildContext context) &#123;</span><br><span class="line">  	&#x2F;&#x2F; todo: add grid rows</span><br><span class="line">    return Container();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>回到 <code>main.dart</code> 上方添加 <code>import &#39;package:ctrip_gird_demo/grid_widget.dart&#39;;</code> 导入 <code>GridWidget</code> ,并将 <code>// todo: add girdWidget</code> 替换为 <code>child: GridWidget(),</code>；</p>
-</li>
-<li><p>准备工作目前告一段落，接下来我们将使用在<code>Cloumn</code>中使用<code>Row</code>的方式来实现布局，我们在 <code>1</code> 中可以得出 <code>gridNav</code> 的每行(<code>Row</code>)高为<code>64</code>(<code>H5</code> 的 <code>borderTop 1px</code> 会产生额外的<code>1px</code>高度),下面我们将开始正式布局代码：</p>
-</li>
-</ol>
-<p>接下来请移步 <a href="https://gitkun.github.io/2020/04/10/Flutter%E5%AE%9E%E7%8E%B0%E6%90%BA%E7%A8%8BGirdNav%E5%B8%83%E5%B1%80_%E6%95%B4%E4%BD%93%E5%B8%83%E5%B1%80/" target="_blank" rel="noopener">Flutter实现携程GirdNav布局_整体布局</a></p>
-
+<img width=375 src="https://github.com/gitKun/ctrip_gird_demo/blob/master/screenshort/complete.png?raw=true" />
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/04/10/Flutter%E5%AE%9E%E7%8E%B0%E6%90%BA%E7%A8%8BGirdNav%E5%B8%83%E5%B1%80_%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -559,7 +408,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-04-09 10:41:33" itemprop="dateModified" datetime="2020-04-09T10:41:33+08:00">2020-04-09</time>
+                <time title="Modified: 2020-04-10 14:07:05" itemprop="dateModified" datetime="2020-04-10T14:07:05+08:00">2020-04-10</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -591,40 +440,14 @@
 <li><p><a href="https://swiftui-lab.com/" target="_blank" rel="noopener">SwiftUI_Lab</a></p>
 </li>
 <li><p><a href="https://sarunw.com/posts/" target="_blank" rel="noopener">Sarun</a></p>
-</li>
-</ul>
-<h3 id="SwiftUI开发过程"><a href="#SwiftUI开发过程" class="headerlink" title="# SwiftUI开发过程"></a># SwiftUI开发过程</h3><p>正如官方宣传的一样，在实际开发<code>简习录</code>过程中我才真正体会到 <code>SwiftUI</code> 的高效，代码量成倍的缩减，复杂UI效果更容易实现，开发时间缩减到难以想象，整个App开发完成时间为<code>2020-03-31</code>到<code>2020-04-03 下午</code> 完成；4月3日晚上开始上线，具体见下<strong>上架</strong>所述；</p>
-<p>附开发git记录图</p>
-<p><img src="https://github.com/gitKun/gitKun.github.io/blob/master/uploads/jianxilu_app/git_log.jpg?raw=true" alt=""></p>
-<p>目前<code>简习录</code>功能十分简单，并没有使用十分高深功能或者搭建复杂的界面，开发过程卡壳的地方就在于更换主题色后导航栏颜色改变的处理，不过也不是什么难题，有需要会单独开一篇文章介绍。</p>
-<h3 id="上架"><a href="#上架" class="headerlink" title="# 上架"></a># 上架</h3><p>由于是第一次独立的从设计到开发应用，并且没有从头阅读 <a href="https://developer.apple.com/cn/app-store/review/guidelines/" target="_blank" rel="noopener">App Store 审核指南</a> 所以被拒的次数着实有点多，如下附图</p>
-<p><img src="https://raw.githubusercontent.com/gitKun/gitKun.github.io/master/uploads/jianxilu_app/%E8%A2%AB%E6%8B%92%E8%AE%B0%E5%BD%95.PNG" alt="被拒记录1"></p>
-<ol>
-<li><p>第一次被拒是因为名称和<code>AppStore</code>已有<code>App</code>出现重名，<code>subTitle</code> 出现竞品名称，图标设计和功能描述不相符等；</p>
-<p>解决：按照指导<strong>重命名</strong>了工程文件(<code>这里有巨坑</code>)，找专业人员重新设计了App的<code>Icon</code>，用心填写了功能描述🤣</p>
-</li>
-<li><p>第二次被拒：2.3.1 存在隐藏的功能；</p>
-<p>解决： 在<code>AppContent</code>中进行了回复并添加了相关代码截图，具体可以自行google相关被拒解决方案；</p>
-</li>
-<li><p>回复<strong>被拒绝</strong>仍然是 2.3 不过这次附上了一个 <code>3.2(f)</code> 的条款；</p>
-<p> 解决：这次仔细研读后，由于十分确定代码中并不存在任何违规内容，所以重洗梳理了开发过程后唯一存在问题的地方就是重命名工程；由于使用了<code>pod</code>,原来项目名为<code>AName.xcodeproj</code> 和 <code>AName.xcworkspace</code>重命名为<code>BName</code>后，查看目录发现<code>pod</code>生成的<code>AName.xcworkspace</code>并没有改变为<code>BName.xcworkspace</code>，执行<code>pod install</code>后生成正确的<code>BName.xcworkspace</code>，所以这次被拒绝的回复中阐述了这个问题，并询问了如果重新提交一个正确打包答二进制文件后还是出现 <code>3.2(f)</code> 后能否给与电话指导，是否会影响后续快速审核的权利等；</p>
-</li>
-</ol>
-<ul>
-<li>如上所述重新打包后提交审核8日凌晨通过了审核</li>
-</ul>
-<h3 id="上架后的反馈"><a href="#上架后的反馈" class="headerlink" title="# 上架后的反馈"></a># 上架后的反馈</h3><ul>
-<li><input checked="" disabled="" type="checkbox"> <p><code>iOS</code> <strong>13.3.1</strong> 点击应用图标闪退，已修复：<br>产生原因，使用了如下代码：</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">UINavigationBar</span>.appearance().isTranslucent = <span class="literal">false</span></span><br></pre></td></tr></table></figure>
-
-<p>参照<a href="https://sarunw.com/posts/uinavigationbar-changes-in-ios13/" target="_blank" rel="noopener">UINavigationBar changes in iOS13</a>修复为如下代码后正常：</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> coloredAppearance = <span class="type">UINavigationBarAppearance</span>()</span><br><span class="line">coloredAppearance.configureWithOpaqueBackground()</span><br><span class="line"><span class="type">UINavigationBar</span>.appearance().standardAppearance = coloredAppearance</span><br></pre></td></tr></table></figure>
-</li>
-<li><p><code>iOS 13.2.2</code> 上时间线页面点击系统返回按钮闪退，原因未知；</p>
-</li>
-</ul>
-<p>备注： 不知道为什么线上crash文件并不能通过对应的 <code>dsYM</code> 文件解析出有用的信息，并且目前真机调试 13.2.2 闪退的问题时也不能正确的断点调试😭 </p>
-
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/04/08/%E7%AE%80%E4%B9%A0%E5%BD%95%E5%BC%80%E5%8F%91%E8%AE%B0%E5%BD%95/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -674,7 +497,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-04-08 08:29:56" itemprop="dateModified" datetime="2020-04-08T08:29:56+08:00">2020-04-08</time>
+                <time title="Modified: 2020-04-10 14:06:08" itemprop="dateModified" datetime="2020-04-10T14:06:08+08:00">2020-04-10</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -697,23 +520,15 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h3 id="欢迎查看"><a href="#欢迎查看" class="headerlink" title="# 欢迎查看"></a># 欢迎查看</h3><p>我用 <code>SwiftUI</code> 开发了一款记录日常习惯的App， <code>简习录</code>；</p>
-<h3 id="应用截图"><a href="#应用截图" class="headerlink" title="# 应用截图"></a># 应用截图</h3><p><img src="https://github.com/gitKun/gitKun.github.io/blob/master/uploads/jianxilu_app/shouye.PNG?raw=true" alt="首页"><br><img src="https://github.com/gitKun/gitKun.github.io/blob/master/uploads/jianxilu_app/shijianxian_light.PNG" alt="时间线1"><br><img src="https://github.com/gitKun/gitKun.github.io/blob/master/uploads/jianxilu_app/shijianxian_theme.PNG?raw=true" alt="时间线2"><br><img src="https://github.com/gitKun/gitKun.github.io/blob/master/uploads/jianxilu_app/shijianxian_dark.PNG?raw=true" alt="时间线3"><br><img src="https://github.com/gitKun/gitKun.github.io/blob/master/uploads/jianxilu_app/dakarizhi.PNG?raw=true" alt="填写打卡日志"></p>
-<h3 id="技术点"><a href="#技术点" class="headerlink" title="# 技术点"></a># 技术点</h3><ul>
-<li>SwiftUI</li>
-<li>CoreData</li>
-</ul>
-<h3 id="功能"><a href="#功能" class="headerlink" title="# 功能"></a># 功能</h3><ul>
-<li>添加习惯</li>
-<li>编辑习惯</li>
-<li>删除习惯</li>
-<li>主题设置</li>
-<li>Dark模式</li>
-</ul>
-<h3 id="下载"><a href="#下载" class="headerlink" title="# 下载"></a># 下载</h3><p>点击 <code>App Store</code> 按钮前往 <code>AppStore</code> ,要求<strong>iOS最低版本13.0</strong> :</p>
-<a target='_blank' href='https://apps.apple.com/cn/app/%E7%AE%80%E4%B9%A0%E5%BD%95-%E7%AE%80%E7%BA%A6%E4%B9%A0%E6%83%AF%E6%89%93%E5%8D%A1%E8%AE%B0%E5%BD%95/id1506204122'>
-    <img src='https://raw.githubusercontent.com/gitKun/gitKun.github.io/master/uploads/common_images/AppStore.jpeg' width='144' height='49'/>
-</a>
+          <h3 id="欢迎查看"><a href="#欢迎查看" class="headerlink" title="# 欢迎查看"></a># 欢迎查看</h3><p>我用 <code>SwiftUI</code> 开发了一款记录日常习惯的App， <code>简习录</code>；<br>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/04/03/%E6%97%A5%E5%B8%B8%E4%B9%A0%E6%83%AF%E6%AC%A2%E8%BF%8E%E9%A1%B5/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -763,7 +578,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-04-08 07:02:26" itemprop="dateModified" datetime="2020-04-08T07:02:26+08:00">2020-04-08</time>
+                <time title="Modified: 2020-04-10 13:48:36" itemprop="dateModified" datetime="2020-04-10T13:48:36+08:00">2020-04-10</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -787,18 +602,15 @@
 
       
           <p>本软件尊重并保护所有使用服务用户的个人隐私权。为了给您提供更准确、更有个性化的服务，本软件会按照本隐私权政策的规定使用和披露您的个人信息。但本软件将以高度的勤勉、审慎义务对待这些信息。除本隐私权政策另有规定外，在未征得您事先许可的情况下，本软件不会将这些信息对外披露或向第三方提供。</p>
-<p>您在同意本软件服务使用协议之时，即视为您已经同意本隐私权政策全部内容。本隐私权政策属于本软件服务使用协议不可分割的一部分。</p>
-<p>1.适用范围</p>
-<p>a)在您使用本软件时产生的数据仅会记录在你的手机上，并不会上传任何服务器。</p>
-<p>2.信息的使用</p>
-<p>a)本软件不会上传或者使用您的本地数据进行任何商业或非商业活动。</p>
-<p>3.信息披露</p>
-<p>a)本软件不会将您的信息披露给任何第三方。</p>
-<p>b)根据法律的有关规定，或者行政或司法机构的要求，向第三方或者行政、司法机构披露；</p>
-<p>c)如您出现违反中国有关法律、法规或者相关规则的情况，需要向第三方披露；</p>
-<p>4.信息安全</p>
-<p>a)在使用本软件时，产生的任何数据记录应由使用者自行保护。</p>
-
+<p>您在同意本软件服务使用协议之时，即视为您已经同意本隐私权政策全部内容。本隐私权政策属于本软件服务使用协议不可分割的一部分。<br>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/04/03/%E9%9A%90%E7%A7%81%E6%94%BF%E7%AD%96/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -920,11 +732,30 @@
 </div>
   <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> v4.2.0
   </div>
-  <span class="post-meta-divider">|</span>
-  <div class="theme-info">Theme – <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.7.2
-  </div>
+
+<script src="/js/prism/prism.js" async></script>
 
         
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      访客数<span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>人数
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      总访问量<span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>次
+    </span>
+</div>
 
 
 
@@ -939,6 +770,7 @@
 
   
   <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/medium-zoom@1/dist/medium-zoom.min.js"></script>
   <script src="/lib/velocity/velocity.min.js"></script>
   <script src="/lib/velocity/velocity.ui.min.js"></script>
 
@@ -947,7 +779,7 @@
 <script src="/js/motion.js"></script>
 
 
-<script src="/js/schemes/muse.js"></script>
+<script src="/js/schemes/pisces.js"></script>
 
 
 <script src="/js/next-boot.js"></script>

@@ -15,22 +15,24 @@
 
 <link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
 
+<link rel="stylesheet" href="/js/prism/prism.css">
+
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Muse","version":"7.7.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Pisces","version":"7.7.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="# 本文收获与价值看完本系列文章后你将能够做出如下100%还原携程 V8.22.0 首页 GridNav 的界面：  你将使用并熟悉以下Widget:  Container 以及 BoxDecoration;  ClipRRect 以及 BorderRadius;  Row 与 Expanded;  Stack 与 Positioned;  FractionallySizedBox;   # 准备">
+  <meta name="description" content="# 本文收获与价值看完本系列文章后你将能够做出如下100%还原携程 V8.22.0 首页 GridNav 的界面：">
 <meta property="og:type" content="article">
 <meta property="og:title" content="手把手教你实现携程GridNav布局-整体布局篇">
 <meta property="og:url" content="http://yoursite.com/2020/04/10/Flutter%E5%AE%9E%E7%8E%B0%E6%90%BA%E7%A8%8BGirdNav%E5%B8%83%E5%B1%80_%E6%95%B4%E4%BD%93%E5%B8%83%E5%B1%80/index.html">
 <meta property="og:site_name" content="欢迎来到CodingKun的博客">
-<meta property="og:description" content="# 本文收获与价值看完本系列文章后你将能够做出如下100%还原携程 V8.22.0 首页 GridNav 的界面：  你将使用并熟悉以下Widget:  Container 以及 BoxDecoration;  ClipRRect 以及 BorderRadius;  Row 与 Expanded;  Stack 与 Positioned;  FractionallySizedBox;   # 准备">
+<meta property="og:description" content="# 本文收获与价值看完本系列文章后你将能够做出如下100%还原携程 V8.22.0 首页 GridNav 的界面：">
 <meta property="og:image" content="https://github.com/gitKun/ctrip_gird_demo/blob/master/screenshort/complete.png?raw=true">
 <meta property="og:image" content="https://github.com/gitKun/ctrip_gird_demo/blob/master/screenshort/step1.png?raw=true">
 <meta property="og:image" content="https://github.com/gitKun/ctrip_gird_demo/blob/master/screenshort/step2_cornenr_border.png?raw=true">
 <meta property="article:published_time" content="2020-04-10T02:17:05.000Z">
-<meta property="article:modified_time" content="2020-04-10T04:43:24.853Z">
+<meta property="article:modified_time" content="2020-04-10T06:32:54.571Z">
 <meta property="article:author" content="CodingKun">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://github.com/gitKun/ctrip_gird_demo/blob/master/screenshort/complete.png?raw=true">
@@ -177,7 +179,7 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2020-04-10 10:17:05 / Modified: 12:43:24" itemprop="dateCreated datePublished" datetime="2020-04-10T10:17:05+08:00">2020-04-10</time>
+              <time title="Created: 2020-04-10 10:17:05 / Modified: 14:32:54" itemprop="dateCreated datePublished" datetime="2020-04-10T10:17:05+08:00">2020-04-10</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -190,6 +192,13 @@
             </span>
 
           
+            <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
 
         </div>
       </header>
@@ -201,7 +210,9 @@
 
       
         <h3 id="本文收获与价值"><a href="#本文收获与价值" class="headerlink" title="# 本文收获与价值"></a># 本文收获与价值</h3><p>看完本系列文章后你将能够做出如下100%还原<code>携程 V8.22.0</code> 首页 <code>GridNav</code> 的界面：</p>
-<p><img src="https://github.com/gitKun/ctrip_gird_demo/blob/master/screenshort/complete.png?raw=true" alt="完成界面"></p>
+<img width=375 src="https://github.com/gitKun/ctrip_gird_demo/blob/master/screenshort/complete.png?raw=true" />
+
+ <a id="more"></a>
 <p>你将使用并熟悉以下<code>Widget</code>:</p>
 <ul>
 <li><p><code>Container</code> 以及 <code>BoxDecoration</code>;</p>
@@ -219,27 +230,87 @@
 <p>注： 以下全部代码改变都在<code>grid_widget.dart</code>文件中机进行；</p>
 <h3 id="添加整体布局"><a href="#添加整体布局" class="headerlink" title="# 添加整体布局"></a># 添加整体布局</h3><ol>
 <li><p>将 <code>build</code> 函数下方添加如下代码</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line">Widget _hotelRow() &#123;</span><br><span class="line">  return ClipRRect(</span><br><span class="line">    &#x2F;&#x2F; todo: add top corner</span><br><span class="line">    child: Container(</span><br><span class="line">      height: 65,</span><br><span class="line">      decoration: BoxDecoration(</span><br><span class="line">        gradient: LinearGradient(</span><br><span class="line">          colors: _hotelColors,</span><br><span class="line">          stops: [0, 0.54],</span><br><span class="line">        ),</span><br><span class="line">      ),</span><br><span class="line">      &#x2F;&#x2F; todo: add hotel row</span><br><span class="line">    ),</span><br><span class="line">  );</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Widget _flightRow() &#123;</span><br><span class="line">  return Container(</span><br><span class="line">    height: 65,</span><br><span class="line">    decoration: BoxDecoration(</span><br><span class="line">      gradient: LinearGradient(</span><br><span class="line">        colors: _flightColors,</span><br><span class="line">        stops: [0, 0.54],</span><br><span class="line">      ),</span><br><span class="line">      &#x2F;&#x2F; todo: add top border </span><br><span class="line">    ),</span><br><span class="line">    &#x2F;&#x2F; todo: add flight row</span><br><span class="line">  );</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Widget _travelRow() &#123;</span><br><span class="line">  return ClipRRect(</span><br><span class="line">    &#x2F;&#x2F; todo: add bottom corner</span><br><span class="line">    child: Container(</span><br><span class="line">      height: 65,</span><br><span class="line">      decoration: BoxDecoration(</span><br><span class="line">        gradient: LinearGradient(</span><br><span class="line">          colors: _travelColors,</span><br><span class="line">          stops: [0, 0.54],</span><br><span class="line">        ),</span><br><span class="line">        &#x2F;&#x2F; todo: add top border </span><br><span class="line">      ),</span><br><span class="line">      &#x2F;&#x2F; todo: add travel row</span><br><span class="line">    ),</span><br><span class="line">  );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code class="line-numbers language-dart"> Widget _hotelRow() {
+   return ClipRRect(
+     // todo: add top corner
+     child: Container(
+       height: 65,
+       decoration: BoxDecoration(
+         gradient: LinearGradient(
+           colors: _hotelColors,
+           stops: [0, 0.54],
+         ),
+       ),
+       // todo: add hotel row
+     ),
+   );
+ }
+
+ Widget _flightRow() {
+   return Container(
+     height: 65,
+     decoration: BoxDecoration(
+       gradient: LinearGradient(
+         colors: _flightColors,
+         stops: [0, 0.54],
+       ),
+       // todo: add top border 
+     ),
+     // todo: add flight row
+   );
+ }
+
+ Widget _travelRow() {
+   return ClipRRect(
+     // todo: add bottom corner
+     child: Container(
+       height: 65,
+       decoration: BoxDecoration(
+         gradient: LinearGradient(
+           colors: _travelColors,
+           stops: [0, 0.54],
+         ),
+         // todo: add top border 
+       ),
+       // todo: add travel row
+     ),
+   );
+ }</code></pre>
 <p> ⚠️<strong>注意</strong>是:<code>ClipRRect</code>⚠️</p>
 </li>
 <li><p>将 <code>build</code> 函数中的</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; todo: add grid rows</span><br><span class="line">return Container();</span><br></pre></td></tr></table></figure>
-
+<pre><code class="line-numbers language-dart"> // todo: add grid rows
+ return Container();</code></pre>
 <p> 替换为：</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">return Column(</span><br><span class="line">  children: &lt;Widget&gt;[</span><br><span class="line">	_hotelRow(),</span><br><span class="line">	_flightRow(),</span><br><span class="line">	_travelRow(),</span><br><span class="line">  ],</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
-
+<pre><code class="line-numbers language-dart"> return Column(
+   children: &lt;Widget&gt;[
+     _hotelRow(),
+     _flightRow(),
+     _travelRow(),
+   ],
+ );</code></pre>
 <p> <code>F5</code>运行到模拟器,查看</p>
-<p> <img src="https://github.com/gitKun/ctrip_gird_demo/blob/master/screenshort/step1.png?raw=true" alt="column布局"></p>
+ <img width=375 src="https://github.com/gitKun/ctrip_gird_demo/blob/master/screenshort/step1.png?raw=true" />
 </li>
 <li><p>添加<code>corner</code>和<code>border</code>:</p>
 <p> 将 <code>// todo: add top corner</code> 替换为：</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">borderRadius: BorderRadius.only(</span><br><span class="line">  topLeft: const Radius.circular(8),</span><br><span class="line">  topRight: const Radius.circular(8),</span><br><span class="line">),</span><br></pre></td></tr></table></figure>
+<pre><code class="line-numbers language-dart"> borderRadius: BorderRadius.only(
+   topLeft: const Radius.circular(8),
+   topRight: const Radius.circular(8),
+ ),</code></pre>
 <p> 将 <code>// todo: add bottom corner</code> 替换为：</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">borderRadius: BorderRadius.only(</span><br><span class="line">  bottomLeft: const Radius.circular(8),</span><br><span class="line">  bottomRight: const Radius.circular(8),</span><br><span class="line">),</span><br></pre></td></tr></table></figure>
+<pre><code class="line-numbers language-dart"> borderRadius: BorderRadius.only(
+   bottomLeft: const Radius.circular(8),
+   bottomRight: const Radius.circular(8),
+ ),</code></pre>
 <p> 将两处 <code>// todo: add top border</code> 替换为：</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">border: Border(</span><br><span class="line">  top: _borderSide,</span><br><span class="line">),</span><br></pre></td></tr></table></figure>
+<pre><code class="line-numbers language-dart"> border: Border(
+   top: _borderSide,
+ ),</code></pre>
 <p> 然后 <code>cmd</code> + <code>s</code> 保存更改后界面将会热更新如下：</p>
-<p> <img src="https://github.com/gitKun/ctrip_gird_demo/blob/master/screenshort/step2_cornenr_border.png?raw=true" alt="圆角和边框"></p>
+ <img width=375 src="https://github.com/gitKun/ctrip_gird_demo/blob/master/screenshort/step2_cornenr_border.png?raw=true" />
+
+
 </li>
 </ol>
 <p>至此，整体页面布局已经结束；</p>
@@ -259,10 +330,13 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2020/04/10/Flutter%E5%AE%9E%E7%8E%B0%E6%90%BA%E7%A8%8BGirdNav%E5%B8%83%E5%B1%80_hotel%E5%B8%83%E5%B1%80/" rel="prev" title="手把手教你实现携程GridNav布局-hotel布局">
-      <i class="fa fa-chevron-left"></i> 手把手教你实现携程GridNav布局-hotel布局
+    <a href="/2020/04/10/Flutter%E5%AE%9E%E7%8E%B0%E6%90%BA%E7%A8%8BGirdNav%E5%B8%83%E5%B1%80_%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C/" rel="prev" title="手把手教你实现携程GridNav布局-准备篇">
+      <i class="fa fa-chevron-left"></i> 手把手教你实现携程GridNav布局-准备篇
     </a></div>
-      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/2020/04/10/Flutter%E5%AE%9E%E7%8E%B0%E6%90%BA%E7%A8%8BGirdNav%E5%B8%83%E5%B1%80_hotel%E5%B8%83%E5%B1%80/" rel="next" title="手把手教你实现携程GridNav布局-hotel布局">
+      手把手教你实现携程GridNav布局-hotel布局 <i class="fa fa-chevron-right"></i>
+    </a></div>
     </div>
       </footer>
     
@@ -376,11 +450,30 @@
 </div>
   <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> v4.2.0
   </div>
-  <span class="post-meta-divider">|</span>
-  <div class="theme-info">Theme – <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.7.2
-  </div>
+
+<script src="/js/prism/prism.js" async></script>
 
         
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      访客数<span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>人数
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      总访问量<span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>次
+    </span>
+</div>
 
 
 
@@ -395,6 +488,7 @@
 
   
   <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/medium-zoom@1/dist/medium-zoom.min.js"></script>
   <script src="/lib/velocity/velocity.min.js"></script>
   <script src="/lib/velocity/velocity.ui.min.js"></script>
 
@@ -403,7 +497,7 @@
 <script src="/js/motion.js"></script>
 
 
-<script src="/js/schemes/muse.js"></script>
+<script src="/js/schemes/pisces.js"></script>
 
 
 <script src="/js/next-boot.js"></script>

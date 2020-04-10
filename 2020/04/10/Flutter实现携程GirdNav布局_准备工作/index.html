@@ -15,21 +15,23 @@
 
 <link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
 
+<link rel="stylesheet" href="/js/prism/prism.css">
+
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Muse","version":"7.7.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Pisces","version":"7.7.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="# 本文收获与价值看完本系列文章后你将能够做出如下100%还原携程 V8.22.0 首页 GridNav 的界面：  你将使用并熟悉以下Widget:  Container 以及 BoxDecoration;  ClipRRect 以及 BorderRadius;  Row 与 Expanded;  Stack 与 Positioned;  FractionallySizedBox;   # 准备">
+  <meta name="description" content="# 本文收获与价值看完本系列文章后你将能够做出如下100%还原携程 V8.22.0 首页 GridNav 的界面：">
 <meta property="og:type" content="article">
 <meta property="og:title" content="手把手教你实现携程GridNav布局-准备篇">
 <meta property="og:url" content="http://yoursite.com/2020/04/10/Flutter%E5%AE%9E%E7%8E%B0%E6%90%BA%E7%A8%8BGirdNav%E5%B8%83%E5%B1%80_%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C/index.html">
 <meta property="og:site_name" content="欢迎来到CodingKun的博客">
-<meta property="og:description" content="# 本文收获与价值看完本系列文章后你将能够做出如下100%还原携程 V8.22.0 首页 GridNav 的界面：  你将使用并熟悉以下Widget:  Container 以及 BoxDecoration;  ClipRRect 以及 BorderRadius;  Row 与 Expanded;  Stack 与 Positioned;  FractionallySizedBox;   # 准备">
+<meta property="og:description" content="# 本文收获与价值看完本系列文章后你将能够做出如下100%还原携程 V8.22.0 首页 GridNav 的界面：">
 <meta property="og:image" content="https://github.com/gitKun/ctrip_gird_demo/blob/master/screenshort/complete.png?raw=true">
 <meta property="og:image" content="https://github.com/gitKun/ctrip_gird_demo/blob/master/screenshort/ctrip_H5.png?raw=true">
 <meta property="article:published_time" content="2020-04-09T23:57:35.000Z">
-<meta property="article:modified_time" content="2020-04-10T04:41:07.943Z">
+<meta property="article:modified_time" content="2020-04-10T06:33:40.417Z">
 <meta property="article:author" content="CodingKun">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://github.com/gitKun/ctrip_gird_demo/blob/master/screenshort/complete.png?raw=true">
@@ -176,7 +178,7 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2020-04-10 07:57:35 / Modified: 12:41:07" itemprop="dateCreated datePublished" datetime="2020-04-10T07:57:35+08:00">2020-04-10</time>
+              <time title="Created: 2020-04-10 07:57:35 / Modified: 14:33:40" itemprop="dateCreated datePublished" datetime="2020-04-10T07:57:35+08:00">2020-04-10</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -189,6 +191,13 @@
             </span>
 
           
+            <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
 
         </div>
       </header>
@@ -200,7 +209,9 @@
 
       
         <h3 id="本文收获与价值"><a href="#本文收获与价值" class="headerlink" title="# 本文收获与价值"></a># 本文收获与价值</h3><p>看完本系列文章后你将能够做出如下100%还原<code>携程 V8.22.0</code> 首页 <code>GridNav</code> 的界面：</p>
-<p><img src="https://github.com/gitKun/ctrip_gird_demo/blob/master/screenshort/complete.png?raw=true" alt="完成界面"></p>
+<img width=375 src="https://github.com/gitKun/ctrip_gird_demo/blob/master/screenshort/complete.png?raw=true" />
+
+ <a id="more"></a>
 <p>你将使用并熟悉以下<code>Widget</code>:</p>
 <ul>
 <li><p><code>Container</code> 以及 <code>BoxDecoration</code>;</p>
@@ -223,7 +234,8 @@
 <p>好了让我们开始准备工作吧：</p>
 <ol>
 <li><p><code>Chorme</code>打开一个新页面，按 <code>F12</code> 进入调试状态，地址栏输入<code>http://m.ctrip.com/html5/</code>，回车，你将会看到如下界面：</p>
-<p> <img src="https://github.com/gitKun/ctrip_gird_demo/blob/master/screenshort/ctrip_H5.png?raw=true" alt="ctrip_H5"></p>
+ <img width=400 src="https://github.com/gitKun/ctrip_gird_demo/blob/master/screenshort/ctrip_H5.png?raw=true" />
+
 <p>现在你可以查看<code>携程 H5</code> 页面的各种布局和颜色，字体等的配置了(这里不是重点: 相关配置已贴在代码中)；</p>
 </li>
 </ol>
@@ -232,10 +244,105 @@
 </ol>
 <ol start="3">
 <li><p>在 <code>main.dart</code> 中删除全部代码，并添加如下代码；</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">import &#39;package:flutter&#x2F;material.dart&#39;;</span><br><span class="line"></span><br><span class="line">void main() &#x3D;&gt; runApp(CtripGridApp());</span><br><span class="line"></span><br><span class="line">class CtripGridApp extends StatelessWidget &#123;</span><br><span class="line">  @override</span><br><span class="line">  Widget build(BuildContext context) &#123;</span><br><span class="line">    return MaterialApp(</span><br><span class="line">      title: &#39;Flutter Demo&#39;,</span><br><span class="line">      theme: ThemeData(</span><br><span class="line">        primarySwatch: Colors.blue,</span><br><span class="line">      ),</span><br><span class="line">      home: Scaffold(</span><br><span class="line">        appBar: AppBar(</span><br><span class="line">          title: Text(</span><br><span class="line">            &quot;携程grid布局&quot;,</span><br><span class="line">            style: TextStyle(fontSize: 18),</span><br><span class="line">          ),</span><br><span class="line">        ),</span><br><span class="line">        body: Container(</span><br><span class="line">          padding: EdgeInsets.only(top: 146),</span><br><span class="line">          margin: EdgeInsets.only(left: 16, right: 16),</span><br><span class="line">          &#x2F;&#x2F; todo: add girdWidget</span><br><span class="line">        ),</span><br><span class="line">      ),</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code class="line-numbers language-dart"> import &#39;package:flutter/material.dart&#39;;
+
+ void main() =&gt; runApp(CtripGridApp());
+
+ class CtripGridApp extends StatelessWidget {
+   @override
+   Widget build(BuildContext context) {
+     return MaterialApp(
+       title: &#39;Flutter Demo&#39;,
+       theme: ThemeData(
+         primarySwatch: Colors.blue,
+       ),
+       home: Scaffold(
+         appBar: AppBar(
+           title: Text(
+             &quot;携程grid布局&quot;,
+             style: TextStyle(fontSize: 18),
+           ),
+         ),
+         body: Container(
+           padding: EdgeInsets.only(top: 146),
+           margin: EdgeInsets.only(left: 16, right: 16),
+           // todo: add girdWidget
+         ),
+       ),
+     );
+   }
+ }</code></pre>
 </li>
 <li><p>新建名为 <code>grid_widget.dart</code> 的文件，并添加我们在<code>1</code>中获得颜色，背景图，字体等的配置代码；</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br></pre></td><td class="code"><pre><span class="line">import &#39;package:flutter&#x2F;material.dart&#39;;</span><br><span class="line"></span><br><span class="line">class GridWidget extends StatelessWidget &#123;</span><br><span class="line"></span><br><span class="line">  final List&lt;Color&gt; _hotelColors &#x3D; [</span><br><span class="line">    Color(0xfffa5956),</span><br><span class="line">    Color(0xfffb8650),</span><br><span class="line">  ];</span><br><span class="line"></span><br><span class="line">  final List&lt;Color&gt; _platformColors &#x3D; [</span><br><span class="line">    Color(0xffffbc49),</span><br><span class="line">    Color(0xffffd252),</span><br><span class="line">  ];</span><br><span class="line">  </span><br><span class="line">  final List&lt;Color&gt; _flightColors &#x3D; [</span><br><span class="line">    Color(0xff4b8fed),</span><br><span class="line">    Color(0xff53bced),</span><br><span class="line">  ];</span><br><span class="line">  </span><br><span class="line">  final List&lt;Color&gt; _travelColors &#x3D; [</span><br><span class="line">    Color(0xff34c2aa),</span><br><span class="line">    Color(0xff6cd557),</span><br><span class="line">  ];</span><br><span class="line"></span><br><span class="line">  final String _hotelBGImageUrl &#x3D;</span><br><span class="line">      &#39;https:&#x2F;&#x2F;pic.c-ctrip.com&#x2F;platform&#x2F;h5&#x2F;home&#x2F;grid-nav-items-hotel@v7.15.png&#39;;</span><br><span class="line">      </span><br><span class="line">  final String _minsuBGImageUrl &#x3D;</span><br><span class="line">      &#39;https:&#x2F;&#x2F;pic.c-ctrip.com&#x2F;platform&#x2F;h5&#x2F;home&#x2F;grid-nav-items-minsu@v7.15.png&#39;;</span><br><span class="line">      </span><br><span class="line">  final String _platformBGImage &#x3D;</span><br><span class="line">      &#39;https:&#x2F;&#x2F;pic.c-ctrip.com&#x2F;platform&#x2F;h5&#x2F;home&#x2F;grid-nav-items-jhj@v7.15.png&#39;;</span><br><span class="line">      </span><br><span class="line">  final String _flightBGImageUrl &#x3D;</span><br><span class="line">      &#39;https:&#x2F;&#x2F;pic.c-ctrip.com&#x2F;platform&#x2F;h5&#x2F;home&#x2F;grid-nav-items-flight@v7.15.png&#39;;</span><br><span class="line">      </span><br><span class="line">  final String _trainBGImage &#x3D;</span><br><span class="line">      &#39;https:&#x2F;&#x2F;pic.c-ctrip.com&#x2F;platform&#x2F;h5&#x2F;home&#x2F;grid-nav-items-train.png&#39;;</span><br><span class="line">      </span><br><span class="line">  final String _tripBGImage &#x3D;</span><br><span class="line">      &#39;https:&#x2F;&#x2F;pic.c-ctrip.com&#x2F;platform&#x2F;h5&#x2F;home&#x2F;grid-nav-items-travel@v7.15.png&#39;;</span><br><span class="line">      </span><br><span class="line">  final String _dingzhiBGImage &#x3D;</span><br><span class="line">      &#39;https:&#x2F;&#x2F;pic.c-ctrip.com&#x2F;platform&#x2F;h5&#x2F;home&#x2F;grid-nav-items-dingzhi@v7.15.png&#39;;</span><br><span class="line"></span><br><span class="line">  final TextStyle _titleStyle &#x3D; TextStyle(</span><br><span class="line">    color: Colors.white,</span><br><span class="line">    fontSize: 14,</span><br><span class="line">    fontWeight: FontWeight.w600,</span><br><span class="line">  );</span><br><span class="line"></span><br><span class="line">  final TextStyle _platformStyle &#x3D; TextStyle(</span><br><span class="line">    color: Color(0xffa05416),</span><br><span class="line">    fontSize: 14,</span><br><span class="line">    fontWeight: FontWeight.w600,</span><br><span class="line">  );</span><br><span class="line"></span><br><span class="line">  final BorderSide _borderSide &#x3D; BorderSide(</span><br><span class="line">    color: Color(0xfff2f2f2),</span><br><span class="line">    width: 1,</span><br><span class="line">  );</span><br><span class="line">  </span><br><span class="line">  final Radius _radius &#x3D; Radius.circular(8);</span><br><span class="line"></span><br><span class="line">  @override</span><br><span class="line">  Widget build(BuildContext context) &#123;</span><br><span class="line">  	&#x2F;&#x2F; todo: add grid rows</span><br><span class="line">    return Container();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code class="line-numbers language-dart"> import &#39;package:flutter/material.dart&#39;;
+
+ class GridWidget extends StatelessWidget {
+
+   final List&lt;Color&gt; _hotelColors = [
+     Color(0xfffa5956),
+     Color(0xfffb8650),
+   ];
+
+   final List&lt;Color&gt; _platformColors = [
+     Color(0xffffbc49),
+     Color(0xffffd252),
+   ];
+
+   final List&lt;Color&gt; _flightColors = [
+     Color(0xff4b8fed),
+     Color(0xff53bced),
+   ];
+
+   final List&lt;Color&gt; _travelColors = [
+     Color(0xff34c2aa),
+     Color(0xff6cd557),
+   ];
+
+   final String _hotelBGImageUrl =
+       &#39;https://pic.c-ctrip.com/platform/h5/home/grid-nav-items-hotel@v7.15.png&#39;;
+
+   final String _minsuBGImageUrl =
+       &#39;https://pic.c-ctrip.com/platform/h5/home/grid-nav-items-minsu@v7.15.png&#39;;
+
+   final String _platformBGImage =
+       &#39;https://pic.c-ctrip.com/platform/h5/home/grid-nav-items-jhj@v7.15.png&#39;;
+
+   final String _flightBGImageUrl =
+       &#39;https://pic.c-ctrip.com/platform/h5/home/grid-nav-items-flight@v7.15.png&#39;;
+
+   final String _trainBGImage =
+       &#39;https://pic.c-ctrip.com/platform/h5/home/grid-nav-items-train.png&#39;;
+
+   final String _tripBGImage =
+       &#39;https://pic.c-ctrip.com/platform/h5/home/grid-nav-items-travel@v7.15.png&#39;;
+
+   final String _dingzhiBGImage =
+       &#39;https://pic.c-ctrip.com/platform/h5/home/grid-nav-items-dingzhi@v7.15.png&#39;;
+
+   final TextStyle _titleStyle = TextStyle(
+     color: Colors.white,
+     fontSize: 14,
+     fontWeight: FontWeight.w600,
+   );
+
+   final TextStyle _platformStyle = TextStyle(
+     color: Color(0xffa05416),
+     fontSize: 14,
+     fontWeight: FontWeight.w600,
+   );
+
+   final BorderSide _borderSide = BorderSide(
+     color: Color(0xfff2f2f2),
+     width: 1,
+   );
+
+   final Radius _radius = Radius.circular(8);
+
+   @override
+   Widget build(BuildContext context) {
+       // todo: add grid rows
+     return Container();
+ }</code></pre>
 </li>
 <li><p>回到 <code>main.dart</code> 上方添加 <code>import &#39;package:ctrip_gird_demo/grid_widget.dart&#39;;</code> 导入 <code>GridWidget</code> ,并将 <code>// todo: add girdWidget</code> 替换为 <code>child: GridWidget(),</code>；</p>
 </li>
@@ -262,8 +369,8 @@
       <i class="fa fa-chevron-left"></i> 简习录开发记录
     </a></div>
       <div class="post-nav-item">
-    <a href="/2020/04/10/Flutter%E5%AE%9E%E7%8E%B0%E6%90%BA%E7%A8%8BGirdNav%E5%B8%83%E5%B1%80_hotel%E5%B8%83%E5%B1%80/" rel="next" title="手把手教你实现携程GridNav布局-hotel布局">
-      手把手教你实现携程GridNav布局-hotel布局 <i class="fa fa-chevron-right"></i>
+    <a href="/2020/04/10/Flutter%E5%AE%9E%E7%8E%B0%E6%90%BA%E7%A8%8BGirdNav%E5%B8%83%E5%B1%80_%E6%95%B4%E4%BD%93%E5%B8%83%E5%B1%80/" rel="next" title="手把手教你实现携程GridNav布局-整体布局篇">
+      手把手教你实现携程GridNav布局-整体布局篇 <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -378,11 +485,30 @@
 </div>
   <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> v4.2.0
   </div>
-  <span class="post-meta-divider">|</span>
-  <div class="theme-info">Theme – <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.7.2
-  </div>
+
+<script src="/js/prism/prism.js" async></script>
 
         
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      访客数<span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>人数
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      总访问量<span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>次
+    </span>
+</div>
 
 
 
@@ -397,6 +523,7 @@
 
   
   <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/medium-zoom@1/dist/medium-zoom.min.js"></script>
   <script src="/lib/velocity/velocity.min.js"></script>
   <script src="/lib/velocity/velocity.ui.min.js"></script>
 
@@ -405,7 +532,7 @@
 <script src="/js/motion.js"></script>
 
 
-<script src="/js/schemes/muse.js"></script>
+<script src="/js/schemes/pisces.js"></script>
 
 
 <script src="/js/next-boot.js"></script>
