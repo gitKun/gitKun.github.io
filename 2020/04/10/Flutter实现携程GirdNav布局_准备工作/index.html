@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Muse","version":"7.7.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="# 本文收获与价值看完本系列文章后你将能够做出如下100%还原携程 V8.22.0 首页 GridNav 的界面：  你将使用并熟悉以下Widget:  Container 以及 BoxDecoration;  ClipRRect 以及 BorderRadius;  Row 与 Expanded;  Stack 与 Positioned;  FractionallySizedBox;   # 准备">
+<meta property="og:type" content="article">
+<meta property="og:title" content="手把手教你实现携程GridNav布局-准备篇">
+<meta property="og:url" content="http://yoursite.com/2020/04/10/Flutter%E5%AE%9E%E7%8E%B0%E6%90%BA%E7%A8%8BGirdNav%E5%B8%83%E5%B1%80_%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C/index.html">
+<meta property="og:site_name" content="欢迎来到CodingKun的博客">
+<meta property="og:description" content="# 本文收获与价值看完本系列文章后你将能够做出如下100%还原携程 V8.22.0 首页 GridNav 的界面：  你将使用并熟悉以下Widget:  Container 以及 BoxDecoration;  ClipRRect 以及 BorderRadius;  Row 与 Expanded;  Stack 与 Positioned;  FractionallySizedBox;   # 准备">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://github.com/gitKun/ctrip_gird_demo/blob/master/screenshort/complete.png?raw=true">
+<meta property="og:image" content="https://github.com/gitKun/ctrip_gird_demo/blob/master/screenshort/ctrip_H5.png?raw=true">
+<meta property="article:published_time" content="2020-04-09T23:57:35.000Z">
+<meta property="article:modified_time" content="2020-04-10T04:29:18.364Z">
+<meta property="article:author" content="CodingKun">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://github.com/gitKun/ctrip_gird_demo/blob/master/screenshort/complete.png?raw=true">
+
+<link rel="canonical" href="http://yoursite.com/2020/04/10/Flutter%E5%AE%9E%E7%8E%B0%E6%90%BA%E7%A8%8BGirdNav%E5%B8%83%E5%B1%80_%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>手把手教你实现携程GridNav布局-准备篇 | 欢迎来到CodingKun的博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">欢迎来到CodingKun的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">SwiftUI, Flutter...</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/10/Flutter%E5%AE%9E%E7%8E%B0%E6%90%BA%E7%A8%8BGirdNav%E5%B8%83%E5%B1%80_%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="CodingKun">
+      <meta itemprop="description" content="喜欢新技术，为了更好地自己努力工作！">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="欢迎来到CodingKun的博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          手把手教你实现携程GridNav布局-准备篇
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-04-10 07:57:35 / 修改时间：12:29:18" itemprop="dateCreated datePublished" datetime="2020-04-10T07:57:35+08:00">2020-04-10</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Flutter/" itemprop="url" rel="index"><span itemprop="name">Flutter</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h3 id="本文收获与价值"><a href="#本文收获与价值" class="headerlink" title="# 本文收获与价值"></a># 本文收获与价值</h3><p>看完本系列文章后你将能够做出如下100%还原<code>携程 V8.22.0</code> 首页 <code>GridNav</code> 的界面：</p>
+<p><img src="https://github.com/gitKun/ctrip_gird_demo/blob/master/screenshort/complete.png?raw=true" alt="完成界面"></p>
+<p>你将使用并熟悉以下<code>Widget</code>:</p>
+<ul>
+<li><p><code>Container</code> 以及 <code>BoxDecoration</code>;</p>
+</li>
+<li><p><code>ClipRRect</code> 以及 <code>BorderRadius</code>;</p>
+</li>
+<li><p><code>Row</code> 与 <code>Expanded</code>;</p>
+</li>
+<li><p><code>Stack</code> 与 <code>Positioned</code>;</p>
+</li>
+<li><p><code>FractionallySizedBox</code>;</p>
+</li>
+</ul>
+<h3 id="准备工作"><a href="#准备工作" class="headerlink" title="# 准备工作"></a># 准备工作</h3><ul>
+<li><p>本文需要你有<code>Flutter</code>的基本知识，文中不会过多介绍各种<code>Widget</code>的具体功能；</p>
+</li>
+<li><p>如果您熟悉或者会使用<code>Chrome</code>进行<code>H5</code>界面调试的话最好不过，没有的话也不影响，我已经将你所需要的全部资源放在了代码中；</p>
+</li>
+</ul>
+<p>好了让我们开始准备工作吧：</p>
+<ol>
+<li><p><code>Chorme</code>打开一个新页面，按 <code>F12</code> 进入调试状态，地址栏输入<code>http://m.ctrip.com/html5/</code>，回车，你将会看到如下界面：</p>
+<p> <img src="https://github.com/gitKun/ctrip_gird_demo/blob/master/screenshort/ctrip_H5.png?raw=true" alt="ctrip_H5"></p>
+<p>现在你可以查看<code>携程 H5</code> 页面的各种布局和颜色，字体等的配置了(这里不是重点: 相关配置已贴在代码中)；</p>
+</li>
+</ol>
+<ol start="2">
+<li>新建名为<code>ctrip_gird_demo</code>的<code>Flutter</code>工程，我这里使用的是 <code>VSCode</code> ，因为 <code>Android Studio 3.6.2</code> 在我电脑上实在太卡了，各种办法都试了，还是解决不掉<strong>卡顿</strong> 和 <strong>CPU占用超高</strong>；</li>
+</ol>
+<ol start="3">
+<li><p>在 <code>main.dart</code> 中删除全部代码，并添加如下代码；</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">import &#39;package:flutter&#x2F;material.dart&#39;;</span><br><span class="line"></span><br><span class="line">void main() &#x3D;&gt; runApp(CtripGridApp());</span><br><span class="line"></span><br><span class="line">class CtripGridApp extends StatelessWidget &#123;</span><br><span class="line">  @override</span><br><span class="line">  Widget build(BuildContext context) &#123;</span><br><span class="line">    return MaterialApp(</span><br><span class="line">      title: &#39;Flutter Demo&#39;,</span><br><span class="line">      theme: ThemeData(</span><br><span class="line">        primarySwatch: Colors.blue,</span><br><span class="line">      ),</span><br><span class="line">      home: Scaffold(</span><br><span class="line">        appBar: AppBar(</span><br><span class="line">          title: Text(</span><br><span class="line">            &quot;携程grid布局&quot;,</span><br><span class="line">            style: TextStyle(fontSize: 18),</span><br><span class="line">          ),</span><br><span class="line">        ),</span><br><span class="line">        body: Container(</span><br><span class="line">          padding: EdgeInsets.only(top: 146),</span><br><span class="line">          margin: EdgeInsets.only(left: 16, right: 16),</span><br><span class="line">          &#x2F;&#x2F; todo: add girdWidget</span><br><span class="line">        ),</span><br><span class="line">      ),</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>新建名为 <code>grid_widget.dart</code> 的文件，并添加我们在<code>1</code>中获得颜色，背景图，字体等的配置代码；</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br></pre></td><td class="code"><pre><span class="line">import &#39;package:flutter&#x2F;material.dart&#39;;</span><br><span class="line"></span><br><span class="line">class GridWidget extends StatelessWidget &#123;</span><br><span class="line"></span><br><span class="line">  final List&lt;Color&gt; _hotelColors &#x3D; [</span><br><span class="line">    Color(0xfffa5956),</span><br><span class="line">    Color(0xfffb8650),</span><br><span class="line">  ];</span><br><span class="line"></span><br><span class="line">  final List&lt;Color&gt; _platformColors &#x3D; [</span><br><span class="line">    Color(0xffffbc49),</span><br><span class="line">    Color(0xffffd252),</span><br><span class="line">  ];</span><br><span class="line">  </span><br><span class="line">  final List&lt;Color&gt; _flightColors &#x3D; [</span><br><span class="line">    Color(0xff4b8fed),</span><br><span class="line">    Color(0xff53bced),</span><br><span class="line">  ];</span><br><span class="line">  </span><br><span class="line">  final List&lt;Color&gt; _travelColors &#x3D; [</span><br><span class="line">    Color(0xff34c2aa),</span><br><span class="line">    Color(0xff6cd557),</span><br><span class="line">  ];</span><br><span class="line"></span><br><span class="line">  final String _hotelBGImageUrl &#x3D;</span><br><span class="line">      &#39;https:&#x2F;&#x2F;pic.c-ctrip.com&#x2F;platform&#x2F;h5&#x2F;home&#x2F;grid-nav-items-hotel@v7.15.png&#39;;</span><br><span class="line">      </span><br><span class="line">  final String _minsuBGImageUrl &#x3D;</span><br><span class="line">      &#39;https:&#x2F;&#x2F;pic.c-ctrip.com&#x2F;platform&#x2F;h5&#x2F;home&#x2F;grid-nav-items-minsu@v7.15.png&#39;;</span><br><span class="line">      </span><br><span class="line">  final String _platformBGImage &#x3D;</span><br><span class="line">      &#39;https:&#x2F;&#x2F;pic.c-ctrip.com&#x2F;platform&#x2F;h5&#x2F;home&#x2F;grid-nav-items-jhj@v7.15.png&#39;;</span><br><span class="line">      </span><br><span class="line">  final String _flightBGImageUrl &#x3D;</span><br><span class="line">      &#39;https:&#x2F;&#x2F;pic.c-ctrip.com&#x2F;platform&#x2F;h5&#x2F;home&#x2F;grid-nav-items-flight@v7.15.png&#39;;</span><br><span class="line">      </span><br><span class="line">  final String _trainBGImage &#x3D;</span><br><span class="line">      &#39;https:&#x2F;&#x2F;pic.c-ctrip.com&#x2F;platform&#x2F;h5&#x2F;home&#x2F;grid-nav-items-train.png&#39;;</span><br><span class="line">      </span><br><span class="line">  final String _tripBGImage &#x3D;</span><br><span class="line">      &#39;https:&#x2F;&#x2F;pic.c-ctrip.com&#x2F;platform&#x2F;h5&#x2F;home&#x2F;grid-nav-items-travel@v7.15.png&#39;;</span><br><span class="line">      </span><br><span class="line">  final String _dingzhiBGImage &#x3D;</span><br><span class="line">      &#39;https:&#x2F;&#x2F;pic.c-ctrip.com&#x2F;platform&#x2F;h5&#x2F;home&#x2F;grid-nav-items-dingzhi@v7.15.png&#39;;</span><br><span class="line"></span><br><span class="line">  final TextStyle _titleStyle &#x3D; TextStyle(</span><br><span class="line">    color: Colors.white,</span><br><span class="line">    fontSize: 14,</span><br><span class="line">    fontWeight: FontWeight.w600,</span><br><span class="line">  );</span><br><span class="line"></span><br><span class="line">  final TextStyle _platformStyle &#x3D; TextStyle(</span><br><span class="line">    color: Color(0xffa05416),</span><br><span class="line">    fontSize: 14,</span><br><span class="line">    fontWeight: FontWeight.w600,</span><br><span class="line">  );</span><br><span class="line"></span><br><span class="line">  final BorderSide _borderSide &#x3D; BorderSide(</span><br><span class="line">    color: Color(0xfff2f2f2),</span><br><span class="line">    width: 1,</span><br><span class="line">  );</span><br><span class="line">  </span><br><span class="line">  final Radius _radius &#x3D; Radius.circular(8);</span><br><span class="line"></span><br><span class="line">  @override</span><br><span class="line">  Widget build(BuildContext context) &#123;</span><br><span class="line">  	&#x2F;&#x2F; todo: add grid rows</span><br><span class="line">    return Container();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>回到 <code>main.dart</code> 上方添加 <code>import &#39;package:ctrip_gird_demo/grid_widget.dart&#39;;</code> 导入 <code>GridWidget</code> ,并将 <code>// todo: add girdWidget</code> 替换为 <code>child: GridWidget(),</code>；</p>
+</li>
+<li><p>准备工作目前告一段落，接下来我们将使用在<code>Cloumn</code>中使用<code>Row</code>的方式来实现布局，我们在 <code>1</code> 中可以得出 <code>gridNav</code> 的每行(<code>Row</code>)高为<code>64</code>(<code>H5</code> 的 <code>borderTop 1px</code> 会产生额外的<code>1px</code>高度),下面我们将开始正式布局代码：</p>
+</li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/04/08/%E7%AE%80%E4%B9%A0%E5%BD%95%E5%BC%80%E5%8F%91%E8%AE%B0%E5%BD%95/" rel="prev" title="简习录开发记录">
+      <i class="fa fa-chevron-left"></i> 简习录开发记录
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/04/10/Flutter%E5%AE%9E%E7%8E%B0%E6%90%BA%E7%A8%8BGirdNav%E5%B8%83%E5%B1%80_hotel%E5%B8%83%E5%B1%80/" rel="next" title="手把手教你实现携程GridNav布局-hotel布局">
+      手把手教你实现携程GridNav布局-hotel布局 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#本文收获与价值"><span class="nav-number">1.</span> <span class="nav-text"># 本文收获与价值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#准备工作"><span class="nav-number">2.</span> <span class="nav-text"># 准备工作</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">CodingKun</p>
+  <div class="site-description" itemprop="description">喜欢新技术，为了更好地自己努力工作！</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">6</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">分类</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">CodingKun</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.2.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.7.2
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
