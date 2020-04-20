@@ -22,29 +22,34 @@
     var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Pisces","version":"7.7.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="喜欢新技术，为了更好地自己努力工作！">
-<meta property="og:type" content="website">
-<meta property="og:title" content="欢迎来到CodingKun的博客">
-<meta property="og:url" content="http://yoursite.com/index.html">
+  <meta name="description" content="示例代码 去年用Objective-C将 potato04 老哥实现的 Swift 版本的 在 iOS 中实现谷歌灭霸彩蛋 仿写了一遍，现在刚自学 Flutter，现在献上 Flutter 版本的实现；         由于是模拟器录制，所以录制的fps 有点低(最高12fps), 更清晰的请参阅沸点 # 响指动画参阅上篇文章Flutter中使用sprites精灵图的做法，这里直接贴出代码部分;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Flutter中使用精灵图">
+<meta property="og:url" content="http://yoursite.com/2020/04/20/%E5%9C%A8Flutter%E4%B8%AD%E5%AE%9E%E7%8E%B0%E8%B0%B7%E6%AD%8C%E7%81%AD%E9%9C%B8%E5%BD%A9%E8%9B%8B/index.html">
 <meta property="og:site_name" content="欢迎来到CodingKun的博客">
-<meta property="og:description" content="喜欢新技术，为了更好地自己努力工作！">
+<meta property="og:description" content="示例代码 去年用Objective-C将 potato04 老哥实现的 Swift 版本的 在 iOS 中实现谷歌灭霸彩蛋 仿写了一遍，现在刚自学 Flutter，现在献上 Flutter 版本的实现；         由于是模拟器录制，所以录制的fps 有点低(最高12fps), 更清晰的请参阅沸点 # 响指动画参阅上篇文章Flutter中使用sprites精灵图的做法，这里直接贴出代码部分;">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2020/4/20/17196c4fc290654d?w=372&h=834&f=gif&s=69094">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2020/4/20/17196c5c4508b925?w=372&h=834&f=gif&s=60694">
+<meta property="article:published_time" content="2020-04-20T09:20:02.000Z">
+<meta property="article:modified_time" content="2020-04-20T09:20:33.400Z">
 <meta property="article:author" content="CodingKun">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://user-gold-cdn.xitu.io/2020/4/20/17196c4fc290654d?w=372&h=834&f=gif&s=69094">
 
-<link rel="canonical" href="http://yoursite.com/">
+<link rel="canonical" href="http://yoursite.com/2020/04/20/%E5%9C%A8Flutter%E4%B8%AD%E5%AE%9E%E7%8E%B0%E8%B0%B7%E6%AD%8C%E7%81%AD%E9%9C%B8%E5%BD%A9%E8%9B%8B/">
 
 
 <script id="page-configurations">
   // https://hexo.io/docs/variables.html
   CONFIG.page = {
     sidebar: "",
-    isHome : true,
-    isPost : false,
+    isHome : false,
+    isPost : true,
     lang   : 'zh-Hans'
   };
 </script>
 
-  <title>欢迎来到CodingKun的博客</title>
+  <title>Flutter中使用精灵图 | 欢迎来到CodingKun的博客</title>
   
 
 
@@ -145,10 +150,10 @@
             
 
   <div class="posts-expand">
-        
+      
   
   
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-Hans">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/20/%E5%9C%A8Flutter%E4%B8%AD%E5%AE%9E%E7%8E%B0%E8%B0%B7%E6%AD%8C%E7%81%AD%E9%9C%B8%E5%BD%A9%E8%9B%8B/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -162,8 +167,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/04/20/%E5%9C%A8Flutter%E4%B8%AD%E5%AE%9E%E7%8E%B0%E8%B0%B7%E6%AD%8C%E7%81%AD%E9%9C%B8%E5%BD%A9%E8%9B%8B/" class="post-title-link" itemprop="url">Flutter中使用精灵图</a>
+          Flutter中使用精灵图
         </h1>
 
         <div class="post-meta">
@@ -187,6 +191,13 @@
             </span>
 
           
+            <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
 
         </div>
       </header>
@@ -197,7 +208,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p><a href="https://github.com/gitKun/thanos_snap_flutter" target="_blank" rel="noopener">示例代码</a></p>
+        <p><a href="https://github.com/gitKun/thanos_snap_flutter" target="_blank" rel="noopener">示例代码</a></p>
 <p>去年用<code>Objective-C</code>将 <strong>potato04</strong> 老哥实现的 <code>Swift</code> 版本的 <a href="https://juejin.im/post/5cc652adf265da03540316e3" target="_blank" rel="noopener">在 iOS 中实现谷歌灭霸彩蛋</a> 仿写了一遍，现在刚自学 <code>Flutter</code>，现在献上 <code>Flutter</code> 版本的实现；</p>
 <!--<image width=375 src="https://github.com/gitKun/thanos_snap_flutter/blob/master/screenshort/snap.gif?raw=true">-->
 
@@ -529,581 +540,33 @@ ui.FrameInfo frame = await codec.getNextFrame();</code></pre><p>会报如下错�
 <h3 id="完结"><a href="#完结" class="headerlink" title="# 完结"></a># 完结</h3><p>核心代码讲解完毕，感兴趣的话，请点赞支持一下吧😉</p>
 <p>完整代码见文章顶部；</p>
 
-      
     </div>
 
     
     
     
+
       <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
 
         
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/12/flutter%E4%BD%BF%E7%94%A8%E7%B2%BE%E7%81%B5%E5%9B%BE(sprites)/">
 
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="CodingKun">
-      <meta itemprop="description" content="喜欢新技术，为了更好地自己努力工作！">
-    </span>
 
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="欢迎来到CodingKun的博客">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/04/12/flutter%E4%BD%BF%E7%94%A8%E7%B2%BE%E7%81%B5%E5%9B%BE(sprites)/" class="post-title-link" itemprop="url">Flutter中使用精灵图</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2020-04-12 17:34:16 / Modified: 19:34:31" itemprop="dateCreated datePublished" datetime="2020-04-12T17:34:16+08:00">2020-04-12</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Flutter/" itemprop="url" rel="index"><span itemprop="name">Flutter</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="本文收获与价值"><a href="#本文收获与价值" class="headerlink" title="# 本文收获与价值"></a># 本文收获与价值</h3><ol>
-<li><p>完成代码后您将收获以下界面：</p>
- <img width=375 src="https://github.com/gitKun/ctrip_gird_demo/blob/master/screenshort/sprites_completed.png?raw=true" />
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/04/12/flutter%E4%BD%BF%E7%94%A8%E7%B2%BE%E7%81%B5%E5%9B%BE(sprites)/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
         
-      
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/04/12/flutter%E4%BD%BF%E7%94%A8%E7%B2%BE%E7%81%B5%E5%9B%BE(sprites)/" rel="prev" title="Flutter中使用精灵图">
+      <i class="fa fa-chevron-left"></i> Flutter中使用精灵图
+    </a></div>
+      <div class="post-nav-item"></div>
     </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
       </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/10/Flutter%E5%AE%9E%E7%8E%B0%E6%90%BA%E7%A8%8BGirdNav%E5%B8%83%E5%B1%80_hotel%E5%B8%83%E5%B1%80/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="CodingKun">
-      <meta itemprop="description" content="喜欢新技术，为了更好地自己努力工作！">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="欢迎来到CodingKun的博客">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/04/10/Flutter%E5%AE%9E%E7%8E%B0%E6%90%BA%E7%A8%8BGirdNav%E5%B8%83%E5%B1%80_hotel%E5%B8%83%E5%B1%80/" class="post-title-link" itemprop="url">手把手教你实现携程GridNav布局-hotel布局</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2020-04-10 12:27:22 / Modified: 14:34:57" itemprop="dateCreated datePublished" datetime="2020-04-10T12:27:22+08:00">2020-04-10</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Flutter/" itemprop="url" rel="index"><span itemprop="name">Flutter</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
     
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="本文收获与价值"><a href="#本文收获与价值" class="headerlink" title="# 本文收获与价值"></a># 本文收获与价值</h3><p>看完本系列文章后你将能够做出如下100%还原<code>携程 V8.22.0</code> 首页 <code>GridNav</code> 的界面：</p>
-<img width=375 src="https://github.com/gitKun/ctrip_gird_demo/blob/master/screenshort/complete.png?raw=true" />
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/04/10/Flutter%E5%AE%9E%E7%8E%B0%E6%90%BA%E7%A8%8BGirdNav%E5%B8%83%E5%B1%80_hotel%E5%B8%83%E5%B1%80/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/10/Flutter%E5%AE%9E%E7%8E%B0%E6%90%BA%E7%A8%8BGirdNav%E5%B8%83%E5%B1%80_%E6%95%B4%E4%BD%93%E5%B8%83%E5%B1%80/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="CodingKun">
-      <meta itemprop="description" content="喜欢新技术，为了更好地自己努力工作！">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="欢迎来到CodingKun的博客">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/04/10/Flutter%E5%AE%9E%E7%8E%B0%E6%90%BA%E7%A8%8BGirdNav%E5%B8%83%E5%B1%80_%E6%95%B4%E4%BD%93%E5%B8%83%E5%B1%80/" class="post-title-link" itemprop="url">手把手教你实现携程GridNav布局-整体布局篇</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2020-04-10 10:17:05 / Modified: 14:32:54" itemprop="dateCreated datePublished" datetime="2020-04-10T10:17:05+08:00">2020-04-10</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Flutter/" itemprop="url" rel="index"><span itemprop="name">Flutter</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="本文收获与价值"><a href="#本文收获与价值" class="headerlink" title="# 本文收获与价值"></a># 本文收获与价值</h3><p>看完本系列文章后你将能够做出如下100%还原<code>携程 V8.22.0</code> 首页 <code>GridNav</code> 的界面：</p>
-<img width=375 src="https://github.com/gitKun/ctrip_gird_demo/blob/master/screenshort/complete.png?raw=true" />
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/04/10/Flutter%E5%AE%9E%E7%8E%B0%E6%90%BA%E7%A8%8BGirdNav%E5%B8%83%E5%B1%80_%E6%95%B4%E4%BD%93%E5%B8%83%E5%B1%80/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/10/Flutter%E5%AE%9E%E7%8E%B0%E6%90%BA%E7%A8%8BGirdNav%E5%B8%83%E5%B1%80_%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="CodingKun">
-      <meta itemprop="description" content="喜欢新技术，为了更好地自己努力工作！">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="欢迎来到CodingKun的博客">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/04/10/Flutter%E5%AE%9E%E7%8E%B0%E6%90%BA%E7%A8%8BGirdNav%E5%B8%83%E5%B1%80_%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C/" class="post-title-link" itemprop="url">手把手教你实现携程GridNav布局-准备篇</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2020-04-10 07:57:35 / Modified: 14:33:40" itemprop="dateCreated datePublished" datetime="2020-04-10T07:57:35+08:00">2020-04-10</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Flutter/" itemprop="url" rel="index"><span itemprop="name">Flutter</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="本文收获与价值"><a href="#本文收获与价值" class="headerlink" title="# 本文收获与价值"></a># 本文收获与价值</h3><p>看完本系列文章后你将能够做出如下100%还原<code>携程 V8.22.0</code> 首页 <code>GridNav</code> 的界面：</p>
-<img width=375 src="https://github.com/gitKun/ctrip_gird_demo/blob/master/screenshort/complete.png?raw=true" />
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/04/10/Flutter%E5%AE%9E%E7%8E%B0%E6%90%BA%E7%A8%8BGirdNav%E5%B8%83%E5%B1%80_%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/08/%E7%AE%80%E4%B9%A0%E5%BD%95%E5%BC%80%E5%8F%91%E8%AE%B0%E5%BD%95/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="CodingKun">
-      <meta itemprop="description" content="喜欢新技术，为了更好地自己努力工作！">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="欢迎来到CodingKun的博客">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/04/08/%E7%AE%80%E4%B9%A0%E5%BD%95%E5%BC%80%E5%8F%91%E8%AE%B0%E5%BD%95/" class="post-title-link" itemprop="url">简习录开发记录</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-04-08 07:00:21" itemprop="dateCreated datePublished" datetime="2020-04-08T07:00:21+08:00">2020-04-08</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-04-10 14:42:43" itemprop="dateModified" datetime="2020-04-10T14:42:43+08:00">2020-04-10</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/AppStore/" itemprop="url" rel="index"><span itemprop="name">AppStore</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="充满表现力的-SwiftUI"><a href="#充满表现力的-SwiftUI" class="headerlink" title="# 充满表现力的 SwiftUI"></a># 充满表现力的 SwiftUI</h3><p>关于<code>SwiftUI</code>的介绍网上已经很多了，这里就不在赘述了，建议从<strong>SwiftUI100day</strong>程始自学，然后跟着<a href="https://developer.apple.com/tutorials/swiftui/tutorials" target="_blank" rel="noopener">官网教程</a></p>
-<p>如果你还行更深入的了解<code>SwiftUI</code>的技术点，请时刻关注<a href="https://developer.apple.com/documentation/swiftui" target="_blank" rel="noopener">官方资料</a>，<a href="https://developer.apple.com/videos/all-videos/?q=SwiftUI" target="_blank" rel="noopener">Videos</a></p>
-<p>这里有神秘的<a href="https://www.bilibili.com/video/av64681507/?p=1" target="_blank" rel="noopener">SwiftUI视频</a>；</p>
-<p>这里还有一份免费的学习网站 <a href="https://www.hackingwithswift.com/100/swiftui" target="_blank" rel="noopener">SwiftUI100day</a>,无法访问请自行扶ti；</p>
-<p>这里推荐高质量SwiftUI文章：</p>
-<ul>
-<li><p><a href="https://swiftui-lab.com/" target="_blank" rel="noopener">SwiftUI_Lab</a></p>
-</li>
-<li><p><a href="https://sarunw.com/posts/" target="_blank" rel="noopener">Sarun</a></p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/04/08/%E7%AE%80%E4%B9%A0%E5%BD%95%E5%BC%80%E5%8F%91%E8%AE%B0%E5%BD%95/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/03/%E6%97%A5%E5%B8%B8%E4%B9%A0%E6%83%AF%E6%AC%A2%E8%BF%8E%E9%A1%B5/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="CodingKun">
-      <meta itemprop="description" content="喜欢新技术，为了更好地自己努力工作！">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="欢迎来到CodingKun的博客">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/04/03/%E6%97%A5%E5%B8%B8%E4%B9%A0%E6%83%AF%E6%AC%A2%E8%BF%8E%E9%A1%B5/" class="post-title-link" itemprop="url">简习录-App欢迎页面</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-04-03 22:50:25" itemprop="dateCreated datePublished" datetime="2020-04-03T22:50:25+08:00">2020-04-03</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-04-10 14:06:08" itemprop="dateModified" datetime="2020-04-10T14:06:08+08:00">2020-04-10</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/AppStore/" itemprop="url" rel="index"><span itemprop="name">AppStore</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="欢迎查看"><a href="#欢迎查看" class="headerlink" title="# 欢迎查看"></a># 欢迎查看</h3><p>我用 <code>SwiftUI</code> 开发了一款记录日常习惯的App， <code>简习录</code>；<br>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/04/03/%E6%97%A5%E5%B8%B8%E4%B9%A0%E6%83%AF%E6%AC%A2%E8%BF%8E%E9%A1%B5/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/03/%E9%9A%90%E7%A7%81%E6%94%BF%E7%AD%96/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="CodingKun">
-      <meta itemprop="description" content="喜欢新技术，为了更好地自己努力工作！">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="欢迎来到CodingKun的博客">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/04/03/%E9%9A%90%E7%A7%81%E6%94%BF%E7%AD%96/" class="post-title-link" itemprop="url">简习录-隐私政策</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-04-03 22:20:20" itemprop="dateCreated datePublished" datetime="2020-04-03T22:20:20+08:00">2020-04-03</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-04-10 13:48:36" itemprop="dateModified" datetime="2020-04-10T13:48:36+08:00">2020-04-10</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Undefied/" itemprop="url" rel="index"><span itemprop="name">Undefied</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>本软件尊重并保护所有使用服务用户的个人隐私权。为了给您提供更准确、更有个性化的服务，本软件会按照本隐私权政策的规定使用和披露您的个人信息。但本软件将以高度的勤勉、审慎义务对待这些信息。除本隐私权政策另有规定外，在未征得您事先许可的情况下，本软件不会将这些信息对外披露或向第三方提供。</p>
-<p>您在同意本软件服务使用协议之时，即视为您已经同意本隐私权政策全部内容。本隐私权政策属于本软件服务使用协议不可分割的一部分。<br>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/04/03/%E9%9A%90%E7%A7%81%E6%94%BF%E7%AD%96/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
   </article>
   
   
   
 
   </div>
-
-  
-
 
 
           </div>
@@ -1154,6 +617,7 @@ ui.FrameInfo frame = await codec.getNextFrame();</code></pre><p>会报如下错�
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#响指动画"><span class="nav-number">1.</span> <span class="nav-text"># 响指动画</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#沙化消失"><span class="nav-number">2.</span> <span class="nav-text"># 沙化消失</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#像素化处理"><span class="nav-number">2.1.</span> <span class="nav-text">像素化处理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#封装处理后图片"><span class="nav-number">2.2.</span> <span class="nav-text">封装处理后图片</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#进行绘制"><span class="nav-number">2.2.1.</span> <span class="nav-text">进行绘制</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#完结"><span class="nav-number">3.</span> <span class="nav-text"># 完结</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
