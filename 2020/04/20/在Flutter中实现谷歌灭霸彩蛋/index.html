@@ -28,13 +28,13 @@
 <meta property="og:url" content="http://yoursite.com/2020/04/20/%E5%9C%A8Flutter%E4%B8%AD%E5%AE%9E%E7%8E%B0%E8%B0%B7%E6%AD%8C%E7%81%AD%E9%9C%B8%E5%BD%A9%E8%9B%8B/index.html">
 <meta property="og:site_name" content="欢迎来到CodingKun的博客">
 <meta property="og:description" content="示例代码 去年用Objective-C将 potato04 老哥实现的 Swift 版本的 在 iOS 中实现谷歌灭霸彩蛋 仿写了一遍，现在刚自学 Flutter，现在献上 Flutter 版本的实现；">
-<meta property="og:image" content="https://user-gold-cdn.xitu.io/2020/4/20/17196c4fc290654d?w=372&h=834&f=gif&s=69094">
-<meta property="og:image" content="https://user-gold-cdn.xitu.io/2020/4/20/17196c5c4508b925?w=372&h=834&f=gif&s=60694">
+<meta property="og:image" content="https://github.com/gitKun/thanos_snap_flutter/blob/master/screenshort/snap.gif?raw=true">
+<meta property="og:image" content="https://github.com/gitKun/thanos_snap_flutter/blob/master/screenshort/reverse.gif?raw=true">
 <meta property="article:published_time" content="2020-04-20T09:20:02.000Z">
-<meta property="article:modified_time" content="2020-04-20T09:22:50.683Z">
+<meta property="article:modified_time" content="2020-04-25T07:05:11.290Z">
 <meta property="article:author" content="CodingKun">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://user-gold-cdn.xitu.io/2020/4/20/17196c4fc290654d?w=372&h=834&f=gif&s=69094">
+<meta name="twitter:image" content="https://github.com/gitKun/thanos_snap_flutter/blob/master/screenshort/snap.gif?raw=true">
 
 <link rel="canonical" href="http://yoursite.com/2020/04/20/%E5%9C%A8Flutter%E4%B8%AD%E5%AE%9E%E7%8E%B0%E8%B0%B7%E6%AD%8C%E7%81%AD%E9%9C%B8%E5%BD%A9%E8%9B%8B/">
 
@@ -176,10 +176,16 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2020-04-20 17:20:02 / Modified: 17:22:50" itemprop="dateCreated datePublished" datetime="2020-04-20T17:20:02+08:00">2020-04-20</time>
+              <time title="Created: 2020-04-20 17:20:02" itemprop="dateCreated datePublished" datetime="2020-04-20T17:20:02+08:00">2020-04-20</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-04-25 15:05:11" itemprop="dateModified" datetime="2020-04-25T15:05:11+08:00">2020-04-25</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
@@ -219,8 +225,19 @@
 <!--![复原动画](https://github.com/gitKun/thanos_snap_flutter/blob/master/screenshort/reverse.gif?raw=true)-->
 
 
-<p><img src="https://user-gold-cdn.xitu.io/2020/4/20/17196c4fc290654d?w=372&h=834&f=gif&s=69094" alt="沙化动画"></p>
-<p><img src="https://user-gold-cdn.xitu.io/2020/4/20/17196c5c4508b925?w=372&h=834&f=gif&s=60694" alt="复原动画"><br>由于是模拟器录制，所以录制的<code>fps</code> 有点低(最高12fps), 更清晰的请参阅<a href="https://juejin.im/pin/5e9c10246fb9a05a2169f4ac" target="_blank" rel="noopener">沸点</a></p>
+<table>
+<thead>
+<tr>
+<th>.</th>
+<th>.</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><img src="https://github.com/gitKun/thanos_snap_flutter/blob/master/screenshort/snap.gif?raw=true" alt="沙化动画"></td>
+<td><img src="https://github.com/gitKun/thanos_snap_flutter/blob/master/screenshort/reverse.gif?raw=true" alt="复原动画"></td>
+</tr>
+</tbody></table>
+<p>由于是模拟器录制，所以录制的<code>fps</code> 有点低(最高12fps), 更清晰的请参阅<a href="https://juejin.im/pin/5e9c10246fb9a05a2169f4ac" target="_blank" rel="noopener">沸点</a></p>
 <h3 id="响指动画"><a href="#响指动画" class="headerlink" title="# 响指动画"></a># 响指动画</h3><p>参阅上篇文章<a href="https://juejin.im/post/5e92fd2e6fb9a03c320bb25f" target="_blank" rel="noopener">Flutter中使用sprites精灵图</a>的做法，这里直接贴出代码部分;</p>
 <p>绘制精灵图的代码：</p>
 <pre><code class="line-numbers language-dart">
@@ -365,7 +382,7 @@ class _ThanosGauntletState extends State&lt;ThanosGauntlet&gt;
 <p>就是利用<code>_aniation.value</code> 来不停地更新 <code>AnimatableSprite</code> 的绘制区域以达到动画的效果；</p>
 <h3 id="沙化消失"><a href="#沙化消失" class="headerlink" title="# 沙化消失"></a># 沙化消失</h3><p>核心思想还是将图片处理为像素，然后根据处理后的像素再生成 <code>ui.Image</code> 使用 <code>canvas</code> 进行绘图操作；</p>
 <h4 id="像素化处理"><a href="#像素化处理" class="headerlink" title="像素化处理"></a>像素化处理</h4><p>新建 <code>dust_effect_draw.dart</code> 文件;</p>
-<pre><code>/// 拆解图像
+<pre><code class="line-numbers language-dart">/// 拆解图像
   _initImages(ui.Image image) async {
     ui.Image originImg = image;
     int imageWidth = originImg.width;
@@ -415,18 +432,20 @@ class _ThanosGauntletState extends State&lt;ThanosGauntlet&gt;
     setState(() {
       this.dustModelList = imageList;
     });
-  }</code></pre><p><strong>注释 1</strong>： 在我们通过<code>ui.Image</code>生成的 <code>Unit8List</code> 数组中，每个存储一个 <code>0~255</code>的数字来表示 <code>R</code>,<code>G</code>, <code>B</code>, <code>A</code> 中的一个信息，从 <code>index = 0</code> 开始每 <code>连续的4位</code>表示一个完整像素的<code>RGBA</code>信息，</p>
+  }</code></pre>
+<p><strong>注释 1</strong>： 在我们通过<code>ui.Image</code>生成的 <code>Unit8List</code> 数组中，每个存储一个 <code>0~255</code>的数字来表示 <code>R</code>,<code>G</code>, <code>B</code>, <code>A</code> 中的一个信息，从 <code>index = 0</code> 开始每 <code>连续的4位</code>表示一个完整像素的<code>RGBA</code>信息，</p>
 <p><strong>注释 2</strong>： 这里的 <code>index</code> 确保图片左边的部分分布在 <code>framePixels</code> 数组的靠前位置，具体请参阅 <a href="https://juejin.im/post/5cc652adf265da03540316e3" target="_blank" rel="noopener">potato04原文</a>所述；</p>
 <p><strong>注释 3</strong>： 这里使用了第三方库用以生成正确的 <code>ui.Image</code>，应为我们直接通过<code>ui.Image</code>得到的 <code>Uint8List</code>是缺失图片信息的其内部仅仅存储了<code>image</code>的像素信息，因此通过<a href="https://github.com/renancaraujo/bitmap/blob/master/lib/bitmap.dart" target="_blank" rel="noopener">Bitmap</a> 来正确的添加一个 <code>RGBA</code> 头部信息，以保证生成正确的图片；</p>
 <p>直接调用 </p>
-<pre><code>ui.Codec codec = await ui.instantiateImageCodec(list, targetWidth: width, targetHeight: height);
-ui.FrameInfo frame = await codec.getNextFrame();</code></pre><p>会报如下错误：</p>
+<pre><code class="line-numbers language-dart">ui.Codec codec = await ui.instantiateImageCodec(list, targetWidth: width, targetHeight: height);
+ui.FrameInfo frame = await codec.getNextFrame();</code></pre>
+<p>会报如下错误：</p>
 <pre><code>[VERBOSE-2:ui_dart_state.cc(157)] Unhandled Exception: Exception: Could not instantiate image codec.
 #0      _futurize (dart:ui/painting.dart:4419:5)
 #1      instantiateImageCodec (dart:ui/painting.dart:1722:10)
 #2      _decodeImageFromListAsync (dart:ui/painting.dart:1751:29)</code></pre><p>更详细叙述见<a href="https://github.com/flutter/flutter/issues/44774" target="_blank" rel="noopener">flutter/issues/44774</a></p>
 <h4 id="封装处理后图片"><a href="#封装处理后图片" class="headerlink" title="封装处理后图片"></a>封装处理后图片</h4><p>新建<code>dust_effect_model.dart</code> 并添加以下代码：</p>
-<pre><code>class DustEffectModel {
+<pre><code class="line-numbers language-dart">class DustEffectModel {
 
   ui.Image image;
 
@@ -476,7 +495,8 @@ ui.FrameInfo frame = await codec.getNextFrame();</code></pre><p>会报如下错�
   }
 
   double _rotation = pi / 12 * (Random().nextDouble() - 0.5);
-}</code></pre><p>其中:</p>
+}</code></pre>
+<p>其中:</p>
 <ul>
 <li><code>image</code> 就是像素化处理后生成的 <code>ui.Image</code>；</li>
 <li><code>_path</code> 是 <code>image</code> 做 <code>translate</code> 动画的路径；</li>
