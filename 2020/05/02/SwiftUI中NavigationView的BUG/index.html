@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+<link rel="stylesheet" href="/js/prism/prism.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Pisces","version":"7.7.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="本人已经使用 SwiftUI 开发了 简习录, 并修复了若干 BUG . 在这些 BUG 中让人头痛的当属 NavigtaionView 了, 这篇文章将会向您报告其中的问题;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SwiftUI中NavigationView的问题">
+<meta property="og:url" content="http://yoursite.com/2020/05/02/SwiftUI%E4%B8%ADNavigationView%E7%9A%84BUG/index.html">
+<meta property="og:site_name" content="欢迎来到CodingKun的博客">
+<meta property="og:description" content="本人已经使用 SwiftUI 开发了 简习录, 并修复了若干 BUG . 在这些 BUG 中让人头痛的当属 NavigtaionView 了, 这篇文章将会向您报告其中的问题;">
+<meta property="article:published_time" content="2020-05-02T14:59:06.000Z">
+<meta property="article:modified_time" content="2020-05-02T15:10:59.573Z">
+<meta property="article:author" content="CodingKun">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://yoursite.com/2020/05/02/SwiftUI%E4%B8%ADNavigationView%E7%9A%84BUG/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-Hans'
+  };
+</script>
+
+  <title>SwiftUI中NavigationView的问题 | 欢迎来到CodingKun的博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">欢迎来到CodingKun的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">SwiftUI, Flutter...</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/02/SwiftUI%E4%B8%ADNavigationView%E7%9A%84BUG/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="CodingKun">
+      <meta itemprop="description" content="喜欢新技术，为了更好地自己努力工作！">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="欢迎来到CodingKun的博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          SwiftUI中NavigationView的问题
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2020-05-02 22:59:06 / Modified: 23:10:59" itemprop="dateCreated datePublished" datetime="2020-05-02T22:59:06+08:00">2020-05-02</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/SwiftUI/" itemprop="url" rel="index"><span itemprop="name">SwiftUI</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>本人已经使用 <code>SwiftUI</code> 开发了 <a href="https://apps.apple.com/cn/app/%E7%AE%80%E4%B9%A0%E5%BD%95-%E7%AE%80%E7%BA%A6%E4%B9%A0%E6%83%AF%E6%89%93%E5%8D%A1%E8%AE%B0%E5%BD%95/id1506204122" target="_blank" rel="noopener">简习录</a>, 并修复了若干 <code>BUG</code> . 在这些 <code>BUG</code> 中让人头痛的当属 <code>NavigtaionView</code> 了, 这篇文章将会向您报告其中的问题;</p>
+ <a id="more"></a>
+
+<h3 id="使用-UINavigationBarAppearance"><a href="#使用-UINavigationBarAppearance" class="headerlink" title="# 使用 UINavigationBarAppearance"></a># 使用 UINavigationBarAppearance</h3><p>在普通情况下我们会在 <code>application(_, didFinishLaunchingWithOptions)</code> 使用如下代码来对 <code>UINavigationBar</code> 进行配置:</p>
+<pre><code class="line-numbers language-Swift">UINavigationBar.appearance().isTranslucent = false
+UINavigationBar.appearance().barTintColor = UIColor(named: &quot;themeColor&quot;)
+UINavigationBar.appearance().shadowImage = UIImage()
+...
+</code></pre>
+<p>对于 <code>SwiftUI</code> 在 <code>iOS 13.4</code>这些代码也会起到作用, 但是:</p>
+<ul>
+<li>在 <code>iOS 13.3</code> 将会直接引起崩溃,并且通过crash文件无法分析到原因;</li>
+<li>如果在代码中一旦对 <code>NavigationView</code> 设置 <code>.navigationViewStyle(StackNavigationViewStyle())</code> ,那么不论什么系统版本都会在这个 <code>NavigationView</code> 将要展示的时候直接崩溃;</li>
+</ul>
+<p>这里推荐使用 <code>iOS 13</code> 的新 <code>API</code> 进行设置,带有注释的代码示例如下:</p>
+<pre><code class="line-numbers language-Swift">let coloredAppearance = UINavigationBarAppearance()
+// 设置为不透明
+coloredAppearance.configureWithOpaqueBackground()
+// 设置背景色(对于纯色的背景可以使用 backgroundColor 而不需要设置 backgroundImage )
+coloredAppearance.backgroundColor = UIColor(named: &quot;themeColor2&quot;)
+// 完全可以不用设置 shadowColor, nil 或者 clear 为相同表现
+coloredAppearance.shadowColor = .clear
+let titleAttr: [NSAttributedString.Key: Any] = [
+    .foregroundColor: UIColor.white
+]
+// 设置 inline 状态下的 title 属性，large 状态对应的是 largeTitleTextAttributes
+coloredAppearance.titleTextAttributes = titleAttr
+// 这里还可以设置 titlePositionAdjustment 来控制标题的偏移量 UIOffset(horizontal: -10, vertical: 0)
+
+// 设置返回按钮的样式
+let backButtonAppearance = UIBarButtonItemAppearance()
+// 字体样式
+backButtonAppearance.normal.titleTextAttributes = [.foregroundColor: UIColor.white]
+coloredAppearance.backButtonAppearance = backButtonAppearance
+
+let backImage = UIImage(named: &quot;back&quot;)?.withRenderingMode(.alwaysOriginal)
+// 设置返回按钮 箭头 image， 注意两个都要设置任何一个为 nil，则使用系统的
+coloredAppearance.setBackIndicatorImage(backImage, transitionMaskImage: backImage)
+// 设置标准(large)状态下的外观属性，compactAppearance 如未设置将使用 standardAppearance 的样式
+UINavigationBar.appearance().standardAppearance = coloredAppearance
+// 描述当相关联的UIScrollView到达与导航栏邻接的边缘（导航栏的顶部边缘）时要使用的导航栏的外观属性。
+// 如果未设置，则将使用修改后的standardAppearance。
+UINavigationBar.appearance().scrollEdgeAppearance = coloredAppearance
+</code></pre>
+<h3 id="NavigationLink-的问题"><a href="#NavigationLink-的问题" class="headerlink" title="# NavigationLink 的问题"></a># <code>NavigationLink</code> 的问题</h3><p>新建一个 <code>SwiftUI</code> 工程,将 <code>ContentView.swift</code> 代码替换如下:</p>
+<pre><code class="line-numbers language-Swift">import SwiftUI
+
+struct ContentView: View {
+    var body: some View {
+        NavigationView {
+            VStack(spacing: 30) {
+                NavigationLink(destination: secondView()) {
+                    Text(&quot;直接使用NavigationLink&quot;)
+                }
+            }
+            .navigationBarTitle(&quot;Navigation BUG&quot;, displayMode: .inline)
+            .navigationBarItems(
+                trailing: NavigationLink(destination: secondView()) {
+                    Text(&quot;Link&quot;)
+            })
+        }
+
+    }
+
+    func secondView() -&gt; some View {
+        return Text(&quot;second&quot;).navigationBarTitle(&quot;Sencod&quot;, displayMode: .inline)
+    }
+}
+
+struct ContentView_Previews: PreviewProvider {
+    static var previews: some View {
+        ContentView()
+    }
+}</code></pre>
+<p>当你在 <code>iOS 13.4.x</code> 和 <code>iOS 13.1.x</code> 的设备上运行后不论是点击 <code>Link</code> 还是 <code>直接使用NavigationLink</code>, 然后点击返回都不会出现问题(?_? 13.1.? 上可能会出现 <code>NavigationBar</code> 无限叠加的问题,这个没有复现😑);</p>
+<p>当你在 <code>iOS 13.2</code> 设备上运行时点击 <code>直接使用NavigationLink</code> 没任何问题, 但是点击 <code>Link</code> 然后返回,会在显示完转场动画后直接崩溃,控制台打印信息为:</p>
+<pre><code class="line-numbers language-Swift">*** Assertion failure in -[UINavigationController popToViewController:transition:], /BuildRoot/Library/Caches/com.apple.xbs/Sources/UIKitCore_Sim/UIKit-3900.12.16/UINavigationController.m:8129
+ *** Terminating app due to uncaught exception &#39;NSInternalInconsistencyException&#39;, reason: &#39;Tried to pop to a view controller that doesn&#39;t exist.&#39;
+ First throw call stack:
+(
+    0   CoreFoundation                      0x00007fff23c4f02e __exceptionPreprocess + 350
+    1   libobjc.A.dylib                     0x00007fff50b97b20 objc_exception_throw + 48
+    2   CoreFoundation                      0x00007fff23c4eda8 +[NSException raise:format:arguments:] + 88
+    3   Foundation                          0x00007fff256c9b61 -[NSAssertionHandler handleFailureInMethod:object:file:lineNumber:description:] + 191
+    4   UIKitCore                           0x00007fff4713d9b1 __57-[UINavigationController popToViewController:transition:]_block_invoke + 620
+    5   UIKitCore                           0x00007fff4713d65e -[UINavigationController popToViewController:transition:] + 753
+    ...</code></pre>
+<p>解决办法是使用 <code>NavigationLink</code> 的另外一种写法:</p>
+<pre><code class="line-numbers language-Swift">NavigationLink(destination: secondView(), isActive: $showDetail, label: { EmptyView() })</code></pre>
+<p>添加此段代码后的 <code>ContentView</code> struct 的整体代码如下</p>
+<pre><code class="line-numbers language-Swift">struct ContentView: View {
+
+    @State private var showDetail = false
+
+    var body: some View {
+        NavigationView {
+            VStack(spacing: 30) {
+                NavigationLink(destination: secondView()) {
+                    Text(&quot;直接使用NavigationLink&quot;)
+                }
+
+                NavigationLink(destination: secondView(), isActive: $showDetail, label: { EmptyView() })
+
+                Button(action: {
+                    self.showDetail = true
+                }) {
+                    Text(&quot;使用isActive和EmptyView&quot;)
+                }
+            }
+            .navigationBarTitle(&quot;Navigation BUG&quot;, displayMode: .inline)
+            .navigationBarItems(
+                leading: Button(&quot;Empty&quot;) {
+                    self.showDetail = true
+                },
+                trailing: NavigationLink(destination: secondView()) {
+                    Text(&quot;Link&quot;)
+            })
+        }
+        .navigationViewStyle(StackNavigationViewStyle())
+    }
+
+
+    func secondView() -&gt; some View {
+        return Text(&quot;second&quot;).navigationBarTitle(&quot;Sencod&quot;, displayMode: .inline)
+    }
+}</code></pre>
+<p>运行后点击 <code>Empty</code> 和 <code>使用isActive和EmptyView</code> 跳转并返回无任何问题, OK 这里宣告结束? NO! 我们高兴的太早了, 在 <code>iOS 13.3</code> 的设备中运行你会发现如果点击 <code>Link</code> 跳转并返回后再次点击 <code>Link</code> 将不会再跳转, 同样的点击 <code>Empty</code> , <code>直接使用NavigationLink</code>, <code>使用isActive和EmptyView</code>, 也是如此！！！</p>
+<p>程序是没崩溃可是我已经要崩溃了! 这个问题暂时无解了! 如果您有好的解决办法请务必留言通知,感谢.</p>
+<p>开始写到完成程序只花了 4 天不到的时间,可是单是适配个 <code>iOS 13.1</code>, <code>iOS 13.2.x</code>, <code>iOS 13.3</code> 就已经在考验我的发量了;</p>
+<p>所以为了不拔高自己的发际线, 在 <em>简习录</em> 第二次的版本更新中, 我不得不指定 <code>iOS 13.4</code> 可用, 但是这并不是完结。</p>
+<h3 id="在-transition-动画在-NavigationView-中的问题"><a href="#在-transition-动画在-NavigationView-中的问题" class="headerlink" title="# 在 transition 动画在 NavigationView 中的问题"></a># 在 transition 动画在 <code>NavigationView</code> 中的问题</h3><p>整体代码如下, 问题件代码注释:</p>
+<pre><code class="line-numbers language-Swift">import SwiftUI
+
+fileprivate extension AnyTransition {
+    static var moveToOpacity: AnyTransition {
+        let insertion = AnyTransition.move(edge: .bottom)
+        let removal = AnyTransition.opacity
+        return .asymmetric(insertion: insertion, removal: removal)
+    }
+}
+
+
+fileprivate class CModel: Identifiable {
+    let id = UUID()
+}
+
+
+struct BUGTransition: View {
+    var body: some View {
+        ShowOrHiddenAnimation2()
+    }
+}
+
+// NavigationView 内部包裹的 ZStcak 使用 ZStcak ==&gt; transition无问题,navigationBar 无法遮挡
+fileprivate struct ShowOrHiddenAnimation4: View {
+    @State private var model: CModel? = nil
+    var body: some View {
+            NavigationView {
+                ZStack {
+                    Button(&quot;Tap Me&quot;) {
+                        withAnimation(.easeOut(duration: 3)) {
+                            self.model = CModel()
+                        }
+                    }
+                    if self.model != nil {
+                        FullScreenView1(model: $model)
+                    }
+                }
+                .navigationBarTitle(&quot;xxx&quot;, displayMode: .inline)
+            }
+    }
+}
+// ZStcak 内部包裹 NavigationView 后使用 Group ==&gt; transition的insert无问题removal无效,navigationBar 完美遮挡
+fileprivate struct ShowOrHiddenAnimation3: View {
+    @State private var model: CModel? = nil
+    var body: some View {
+        ZStack {
+            NavigationView {
+                Button(&quot;Tap Me&quot;) {
+                    withAnimation(.easeOut(duration: 3)) {
+                        self.model = CModel()
+                    }
+                }
+                .navigationBarTitle(&quot;xxx&quot;, displayMode: .inline)
+            }
+            if self.model != nil {
+                /*
+                Color.pink.edgesIgnoringSafeArea(.all)
+                    .transition(.moveToOpacity)
+                    .animation(.easeOut(duration: 3))
+                    .onTapGesture {
+                        withAnimation(.easeOut(duration: 3)) {
+                            self.model = nil
+                        }
+                    }
+                */
+                FullScreenView2(model: $model)
+            }
+        }
+    }
+}
+// ZStcak 内部包裹 NavigationView 后使用 ZStack ==&gt; transition的insert无问题removal无效,navigationBar 完美遮挡
+fileprivate struct ShowOrHiddenAnimation2: View {
+    @State private var model: CModel? = nil
+    var body: some View {
+        ZStack {
+            NavigationView {
+                Button(&quot;Tap Me&quot;) {
+                    withAnimation(.easeOut(duration: 3)) {
+                        self.model = CModel()
+                    }
+                }
+                .navigationBarTitle(&quot;xxx&quot;, displayMode: .inline)
+            }
+            if self.model != nil {
+                FullScreenView1(model: $model)
+            }
+        }
+    }
+}
+// ZStack 内部直接使用 ZStack ==&gt; transition无问题,未使用 navigationBar
+fileprivate struct ShowOrHiddenAnimation1: View {
+    @State private var model: CModel? = nil
+    var body: some View {
+        ZStack {
+            Button(&quot;Tap Me&quot;) {
+                withAnimation(.easeOut(duration: 3)) {
+                    self.model = CModel()
+                }
+            }
+            if self.model != nil {
+                FullScreenView1(model: $model)
+            }
+        }
+    }
+}
+
+// 内部指定使用 ZStack
+fileprivate struct FullScreenView1: View {
+    @Binding var model: CModel?
+    var body: some View {
+        ZStack {
+            Color.pink.edgesIgnoringSafeArea(.all)
+        }
+        .transition(.moveToOpacity)
+        .animation(.easeOut(duration: 3))
+        .onTapGesture {
+            withAnimation(.easeOut(duration: 3)) {
+                self.model = nil
+            }
+        }
+    }
+}
+
+// 使用 Group 包装,布局由外部决定
+fileprivate struct FullScreenView2: View {
+    @Binding var model: CModel?
+    var body: some View {
+        Group {
+            Color.pink.edgesIgnoringSafeArea(.all)
+            NavigationView {
+                Text(&quot;FullScreenView2&quot;)
+            }
+        }
+        .transition(.moveToOpacity)
+        .animation(.easeOut(duration: 3))
+        .onTapGesture {
+            withAnimation(.easeOut(duration: 3)) {
+                self.model = nil
+            }
+        }
+    }
+}
+
+struct BUGTransition_Previews: PreviewProvider {
+    static var previews: some View {
+        BUGTransition()
+    }
+}</code></pre>
+<p>同样的如果你下载了 <a href="https://developer.apple.com/tutorials/swiftui/animating-views-and-transitions" target="_blank" rel="noopener">官方教程demo</a> ,找到</p>
+<pre><code class="line-numbers language-Swift">extension AnyTransition {
+    static var moveAndFade: AnyTransition {
+        let insertion = AnyTransition.move(edge: .trailing)
+            .combined(with: .opacity)
+        let removal = AnyTransition.scale
+            .combined(with: .opacity)
+        return .asymmetric(insertion: insertion, removal: removal)
+    }
+}</code></pre>
+<p>运行后也会发现 <code>removal</code> 效果在 <code>NavigationView</code> 中完全失效了🤭,这是官方彩蛋?</p>
+<h3 id="完结"><a href="#完结" class="headerlink" title="# 完结?"></a># 完结?</h3><p>这里仅仅是列举了 <code>NavigationView</code> 中的一部分问题, </p>
+<ul>
+<li>其他不是很严重的不再赘述;</li>
+<li>和 <code>NavigationView</code> 不相关的也不在这篇中描述了(例如, 对使用 <code>UIViewRepresentable</code> 的 <code>View</code> 添加 <code>cornerRadius</code> 修饰符会导致其“失去响应”🤥);</li>
+</ul>
+<p>目前 <a href="https://apps.apple.com/cn/app/%E7%AE%80%E4%B9%A0%E5%BD%95-%E7%AE%80%E7%BA%A6%E4%B9%A0%E6%83%AF%E6%89%93%E5%8D%A1%E8%AE%B0%E5%BD%95/id1506204122" target="_blank" rel="noopener">简习录</a> 已经支持 <code>iOS 13</code> 的全部系统版本.<br>最终为了完全适配 <code>iOS 13.x</code>, 我不得不弃用 <code>SwiftUI</code> 中的 <code>NavigationView</code> , 转而采用外部的 <code>UINavigationController</code> 设置 <code>UIHostingController</code> 为 <code>rootVC</code>, <code>UIHostingController</code> 使用对应的 <code>SwiftUI-View</code> 来初始化的方式, 修复这些问题。</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/04/20/%E5%9C%A8Flutter%E4%B8%AD%E5%AE%9E%E7%8E%B0%E8%B0%B7%E6%AD%8C%E7%81%AD%E9%9C%B8%E5%BD%A9%E8%9B%8B/" rel="prev" title="Flutter中使用精灵图">
+      <i class="fa fa-chevron-left"></i> Flutter中使用精灵图
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#使用-UINavigationBarAppearance"><span class="nav-number">1.</span> <span class="nav-text"># 使用 UINavigationBarAppearance</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#NavigationLink-的问题"><span class="nav-number">2.</span> <span class="nav-text"># NavigationLink 的问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#在-transition-动画在-NavigationView-中的问题"><span class="nav-number">3.</span> <span class="nav-text"># 在 transition 动画在 NavigationView 中的问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#完结"><span class="nav-number">4.</span> <span class="nav-text"># 完结?</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">CodingKun</p>
+  <div class="site-description" itemprop="description">喜欢新技术，为了更好地自己努力工作！</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">9</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">categories</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">CodingKun</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> v4.2.0
+  </div>
+
+<script src="/js/prism/prism.js" async></script>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      访客数<span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>人数
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      总访问量<span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>次
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/medium-zoom@1/dist/medium-zoom.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
