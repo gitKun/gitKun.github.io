@@ -1,0 +1,847 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+<link rel="stylesheet" href="/js/prism/prism.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Pisces","version":"7.7.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="嗨,这里有一份RxSwift+MVVM实现的掘金沸点页面  先看下最终的效果吧：    . .     )   当然这里也有一段完整的视频链接 预览视频">
+<meta property="og:type" content="article">
+<meta property="og:title" content="嗨,这里有一份RxSwift+MVVM实现的掘金沸点页面">
+<meta property="og:url" content="http://yoursite.com/2020/06/02/202006021442/index.html">
+<meta property="og:site_name" content="欢迎来到CodingKun的博客">
+<meta property="og:description" content="嗨,这里有一份RxSwift+MVVM实现的掘金沸点页面  先看下最终的效果吧：    . .     )   当然这里也有一段完整的视频链接 预览视频">
+<meta property="article:published_time" content="2020-06-02T08:46:32.000Z">
+<meta property="article:modified_time" content="2020-06-02T08:53:01.832Z">
+<meta property="article:author" content="CodingKun">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://yoursite.com/2020/06/02/202006021442/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-Hans'
+  };
+</script>
+
+  <title>嗨,这里有一份RxSwift+MVVM实现的掘金沸点页面 | 欢迎来到CodingKun的博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">欢迎来到CodingKun的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">SwiftUI, Flutter...</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/02/202006021442/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="CodingKun">
+      <meta itemprop="description" content="喜欢新技术，为了更好地自己努力工作！">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="欢迎来到CodingKun的博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          嗨,这里有一份RxSwift+MVVM实现的掘金沸点页面
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2020-06-02 16:46:32 / Modified: 16:53:01" itemprop="dateCreated datePublished" datetime="2020-06-02T16:46:32+08:00">2020-06-02</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Swift/" itemprop="url" rel="index"><span itemprop="name">Swift</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <blockquote>
+<p>嗨,这里有一份RxSwift+MVVM实现的掘金沸点页面</p>
+</blockquote>
+<p>先看下最终的效果吧：</p>
+<table>
+<thead>
+<tr>
+<th>.</th>
+<th>.</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><image width=175 src="https://i.loli.net/2020/06/02/j8SyERJDWO6P9Ne.gif"></td>
+<td><image width=175 src="https://i.loli.net/2020/06/02/G9XwKyH21zYSQMA.gif">)</td>
+</tr>
+</tbody></table>
+<p>当然这里也有一段完整的视频链接 <a href="https://www.bilibili.com/video/BV1Ga4y1v72b/" target="_blank" rel="noopener">预览视频</a></p>
+ <a id="more"></a>
+
+<ul>
+<li>关于 <code>MVVM</code> 网上已经有很多资料了，作为第一次实际使用的我不做过的的解释，请各位自行查阅相关文章。这里金记录下我的使用感受，<code>ViweModel</code> 很方便复用，代码分层很清楚。</li>
+<li>同样的关于 <code>RxSwift</code> 本人也是前几天从0开始学习的，也不会给出过多的介绍。</li>
+</ul>
+<p>如果您也想自己实现一次<a href="https://github.com/gitKun/Xitu/releases/tag/v1.1.1" target="_blank" rel="noopener">点这里</a>我已经帮你做好了一份基本的框架，当然完整版的也有，在文章最底部。（已经添加了 <code>SwiftLint</code>）</p>
+<h3 id="代码展示"><a href="#代码展示" class="headerlink" title="# 代码展示"></a># 代码展示</h3><p>先来看看完成后的 <code>ViewController</code> 的核心实际代码：</p>
+<pre><code class="line-numbers language-Swift">
+class ViewController: UIViewController {
+
+  @IBOutlet weak var tableView: UITableView!
+  let disposeBag = DisposeBag()
+  let viewModel = XTRecommendViemModel()
+  override func viewDidLoad() {
+    super.viewDidLoad()
+    initialUI()
+    bindViewModel()
+    viewModel.viewDidload()
+  }
+}
+
+// MARK: initial UI
+extension ViewController {
+
+  private func initialUI() {
+    view.backgroundColor = .white
+    title = &quot;数据请求&quot;
+    initialTableView()
+  }
+
+  private func initialTableView() {
+    // 预估行高 会造成 cell 的重复创建和销毁 例如 本来应该创建 6个,
+    // 预估行高会创建 7 到 8 个然后在你下划或者上划到头后就开始销毁多余的, 再次滑动又会创建新的
+    // 测试机为 6, iOS12.4 和  XR iOS13.5
+    tableView.rowHeight = UITableView.automaticDimension
+    tableView.estimatedRowHeight = 260
+  }
+}
+
+// MARK: iniatal rx
+extension ViewController {
+
+  func bindViewModel() {
+    // 配置下拉刷新
+    let tableHeader = MJRefreshNormalHeader()
+    tableHeader.isAutomaticallyChangeAlpha = true
+    tableHeader.lastUpdatedTimeLabel?.isHidden = true
+    tableView.mj_header = tableHeader
+    tableView.mj_footer = MJRefreshBackNormalFooter()
+    // 绑定数据
+    tableHeader.rx.refreshing
+      .asDriver()
+      .drive(onNext: { [weak self] _ in
+        self?.viewModel.loadData(true)
+      })
+      .disposed(by: disposeBag)
+    tableView.mj_footer?.rx.refreshing
+      .asDriver()
+      .drive(onNext: { [weak self] _ in
+        self?.viewModel.loadData(false)
+      })
+      .disposed(by: disposeBag)
+    // 刷新状态管理
+    viewModel.refreshStatusBind(to: self.tableView).disposed(by: disposeBag)
+    let dataSource = self.tableViewCellDataSourc
+    // 获取数据
+    self.viewModel.outputs.dataSource
+      .drive(tableView.rx.items(dataSource: dataSource))
+      .disposed(by: disposeBag)
+  }
+}
+
+/// 配置 tableViewCell 的数据源
+extension ViewController {
+  var tableViewCellDataSourc: RxTableViewSectionedReloadDataSource&lt;SectionModel&lt;String, UserActivity&gt;&gt; {
+    let dataSource = RxTableViewSectionedReloadDataSource&lt;SectionModel&lt;String, UserActivity&gt;&gt;(
+    configureCell: { [weak self] (_, tabView, indexPath, model) -&gt; UITableViewCell in
+      let sCell = tabView.dequeueReusableCell(withIdentifier: &quot;XTCell&quot;, for: indexPath)
+      guard let cell = sCell as? XTCell else { return sCell}
+      cell.confirgueCell(model: model)
+      if !cell.hasBindStream {
+        guard let self = self else { return cell }
+        cell.updaBindState()
+        let imageTapObserver: Binder&lt;ImageViewTapInfo&gt; = Binder(self, scheduler: MainScheduler.instance) { viewController, info in
+          viewController.showPhotoBrowser(info: info)
+        }
+        cell.bindImageTapStream(observer: imageTapObserver)
+      }
+      return cell
+    })
+    return dataSource
+  }
+}
+
+// MARK: 显示相册
+private extension ViewController {
+  func showPhotoBrowser(info: ImageViewTapInfo) {
+       ...
+    self.showXTPhotoBrowser(from: info.sourceView, imagesUrl: orgImageUrlArray, selsctIndex: selectIndex)
+  }
+
+  func showXTPhotoBrowser(from sourceView: UIImageView, imagesUrl: [String], selsctIndex: Int) {
+    guard !imagesUrl.isEmpty else { return }
+    let orgImageUrlArray = imagesUrl
+    let imageView = sourceView
+    let browser = JXPhotoBrowser()
+    ...
+    browser.show()
+  }
+}
+</code></pre>
+<p>实际的代码行数为 <code>160</code> 行，具体的可以在完整版中看到</p>
+<p>作为 <code>ViewModel</code> 的 <code>XTRecommendViemModel</code> 中的核心代码</p>
+<pre><code class="line-numbers language-Swift">/**
+ *
+ * Inputs 只提供方法
+ * Outputs 提供 Observable
+ *
+ */
+
+protocol XTRecommendViemModelInputs {
+
+  /// 加载数据
+  /// - Parameter isRefreshing: 是否为刷新,**true**就加入到头部,**false**加入尾部
+  func loadData(_ isRefreshing: Bool)
+  /// 界面已经加载
+  func viewDidload()
+}
+
+protocol XTRecommendViemModelOutPuts {
+  /// 数据源数组
+  var dataSource: Driver&lt;[SectionModel&lt;String, UserActivity&gt;]&gt; { get }
+}
+
+protocol XTRecommendViemModelType {
+  var inputs: XTRecommendViemModelInputs { get }
+  var outputs: XTRecommendViemModelOutPuts { get }
+}
+
+class XTRecommendViemModel: XTRecommendViemModelType, XTRecommendViemModelInputs, XTRecommendViemModelOutPuts {
+
+  let refreshStauts = BehaviorRelay&lt;RefreshStatus&gt;(value: .none)
+  // 协议
+  var inputs: XTRecommendViemModelInputs { return self }
+  var outputs: XTRecommendViemModelOutPuts { return self }
+  // inputs
+  func loadData(_ isRefreshing: Bool) {
+    // 结束上次的刷新状态
+    refreshStauts.accept(isRefreshing ? .endFooterRefresh : .endHeaderRefresh)
+    loadDataProperty.onNext(isRefreshing)
+  }
+  func viewDidload() {
+    refreshStauts.accept(.hiddendFooter)
+    refreshStauts.accept(.begainHeaderRefresh)
+  }
+  // outputs
+  var dataSource: Driver&lt;[SectionModel&lt;String, UserActivity&gt;]&gt; {
+    let loadNewCommand = loadDataProperty
+      .filter { $0 }
+      .asDriver { _ -&gt; Driver&lt;Bool&gt; in
+        return Driver.just(true)
+      }
+      .flatMap { [weak self] _ -&gt; Driver&lt;[UserActivity]&gt; in
+        guard let `self` = self else { return Driver&lt;[UserActivity]&gt;.just([]) }
+        return self.queryNewData()
+      }
+      .flatMap { [weak self] items -&gt; Driver&lt;XTRecommendViemModel.EditeDataCommand&gt; in
+        self?.refreshStauts.accept(.endHeaderRefresh)
+        self?.refreshStauts.accept(.showFooter)
+        return Driver.just(EditeDataCommand.loadNewData(items: items))
+      }
+    let loadMoreCommand = loadDataProperty
+      .filter { !$0 }
+      .asDriver { _ in Driver.just(true) }
+      .flatMap { [weak self] _ -&gt; Driver&lt;[UserActivity]&gt; in
+        guard let `self` = self else { return Driver&lt;[UserActivity]&gt;.just([]) }
+        return self.queryNextPageData()
+      }
+      .flatMap { [weak self] items -&gt; Driver&lt;XTRecommendViemModel.EditeDataCommand&gt; in
+        // 判断 items 和 noNext 字段
+        // 选择 hiddendFooter, endFooterRefresh, endFooterRefreshWithNoData
+        self?.refreshStauts.accept(.endFooterRefresh)
+        return Driver.just(EditeDataCommand.loadOldData(items: items))
+      }
+    let initialWrappedModel = RecommendWrappedModel()
+    let dataSource = Driver.of(loadNewCommand, loadMoreCommand)
+      .merge()
+      .scan(initialWrappedModel) { (resultWrapped: RecommendWrappedModel, command: EditeDataCommand) -&gt; RecommendWrappedModel in
+        return resultWrapped.execute(command: command)
+      }
+      .map { wrappedModel -&gt; [SectionModel&lt;String, UserActivity&gt;] in
+        return [SectionModel(model: &quot;XTRemSectionModel&quot;, items: wrappedModel.items)]
+      }
+    return dataSource
+  }
+
+  // private
+  private let loadDataProperty: PublishSubject&lt;Bool&gt; = PublishSubject()
+  // 网络请求
+  //private lazy var recommendProvider = { MoyaProvider&lt;JueJinGraphqlAPI&gt;() }()
+}
+
+/// 这里就是刷新状态控制的协议
+extension XTRecommendViemModel: Refreshable {}
+
+// MARK: 真实网路请求
+private extension XTRecommendViemModel {
+  func queryNewData() -&gt; Driver&lt;[UserActivity]&gt; {
+    /* 网络请求被本地数据替换，公开所爬接口是不道德的 */
+    let items = readerLoadData()
+    let result = Driver&lt;[UserActivity]&gt;.just(items).delay(.milliseconds(1500))
+    return result
+  }
+  func queryNextPageData() -&gt; Driver&lt;[UserActivity]&gt; {
+    let items = readerLoadData()
+    let result = Driver&lt;[UserActivity]&gt;.just(items).delay(.milliseconds(1500))
+    return result
+  }
+}
+
+// MARK: 生成指定形式的数据
+private extension XTRecommendViemModel {
+  // 加载本地数据
+  func readerLoadData() -&gt; [UserActivity] {
+    let model = UserActivity.modelFromLocal()
+    let result = model.shuffled().suffix(10)
+    return Array(result)
+  }
+}
+
+// MARK: 定义数据的转换方式
+private extension XTRecommendViemModel {
+  enum EditeDataCommand {
+    /// instert 到头部
+    case loadNewData(items: [UserActivity])
+    /// append 到尾部
+    case loadOldData(items: [UserActivity])
+  }
+
+  /// 内部数据存储的数据结构
+  struct RecommendWrappedModel {
+    fileprivate var items: [UserActivity]
+    init(items: [UserActivity] = []) {
+      self.items = items
+    }
+    /// 核心
+    func execute(command: EditeDataCommand) -&gt; RecommendWrappedModel {
+      switch command {
+      case let .loadNewData(insertItems):
+        return RecommendWrappedModel(items: insertItems)
+      case let .loadOldData(appedItems):
+        var tmpArray = self.items
+        tmpArray.append(contentsOf: appedItems)
+        return RecommendWrappedModel(items: tmpArray)
+      }
+    }
+  }
+// The end
+}</code></pre>
+<p>真实行数为  <code>170</code> 带有注释</p>
+<h3 id="ViewModel-的解析"><a href="#ViewModel-的解析" class="headerlink" title="# ViewModel 的解析"></a># ViewModel 的解析</h3><p>由于是第一次用，我这注释应该还算详实吧😅。</p>
+<p><code>Input</code> 协议指定了 <code>VC</code> 能够调用的方法，<code>Output</code> 则是在内部处理数据后向 <code>VC</code> 提供数据。然后定义了一个新的协议 <code>XTRecommendViemModelType</code> 内部需要遵守协议者提供 <code>inputs</code> 和 <code>outputs</code> 属性, 再让 <code>XTRecommendViemModel</code> 同时遵守着三个协议，其 <code>inputs</code> 和 <code>outputs</code> 都返回 <code>self</code></p>
+<pre><code class="line-numbers language-Swift">class XTRecommendViemModel: XTRecommendViemModelType, XTRecommendViemModelInputs, XTRecommendViemModelOutPuts {
+    ...
+    // 协议
+      var inputs: XTRecommendViemModelInputs { return self }
+      var outputs: XTRecommendViemModelOutPuts { return self }
+}</code></pre>
+<p>这样外部在使用时需要向 <code>ViewModel</code> 传递信息就使用 <code>viewModel.inputs.xxx</code> , 需要 <code>ViewModel</code> 提供信息就通过 <code>viewModel.outputs.xxx</code>，分离职责，代码逻辑分层。</p>
+<p><code>Inputs</code> 中的 </p>
+<pre><code class="line-numbers language-Swift">func loadData(_ isRefreshing: Bool)</code></pre>
+<p>对应的是 <code>XTRecommendViemModel</code> 中的 </p>
+<pre><code class="line-numbers language-Swift">private let loadDataProperty: PublishSubject&lt;Bool&gt; = PublishSubject()</code></pre>
+<p><code>VC</code> 每次调用 <code>loadData(:)</code> 就会使 <code>loadDataProperty</code> 发送一次 <code>stream</code>,  <code>XTRecommendViemModel</code> 的 <code>dataSource</code> 就通过 <code>flatMap</code> 这个 <code>PublishSubject&lt;Bool&gt;</code> 来生相的。这里先按下不表，让我们来看看 <code>XTRecommendViemModel</code> 中真正处理和存储数据的类型  <code>struct RecommendWrappedModel</code> 和 <code>enum EditeDataCommand</code>;</p>
+<p><code>EditeDataCommand</code> 定义了对数据操作的类型，我在这里仅仅定义了刷新数据的 <code>loadNew</code> 和添加数据的 <code>loadMore</code> ，实际上是可以根据需求拓展出 <code>reloadIndex</code> 等。</p>
+<pre><code class="line-numbers language-Swift">enum EditeDataCommand {
+  /// instert 到头部
+  case loadNewData(items: [UserActivity])
+  /// append 到尾部
+  case loadOldData(items: [UserActivity])
+}</code></pre>
+<p><code>RecommendWrappedModel</code> 内部的数组 <code>private var items: [UserActivity]</code> 就是数据存储的位置， 其对外部只提供 <code>func execute(command: EditeDataCommand) -&gt; RecommendWrappedModel {...}</code> 方法用于操作数据</p>
+<pre><code class="line-numbers language-Swift">/// 核心
+func execute(command: EditeDataCommand) -&gt; RecommendWrappedModel {
+  switch command {
+  case let .loadNewData(insertItems):
+    return RecommendWrappedModel(items: insertItems)
+  case let .loadOldData(appedItems):
+    var tmpArray = self.items
+    tmpArray.append(contentsOf: appedItems)
+    return RecommendWrappedModel(items: tmpArray)
+  }
+}</code></pre>
+<p>现在来看看 <code>dataSoure</code> 是如何生成的。</p>
+<p>先看 <code>loadNewCommand</code></p>
+<pre><code class="line-numbers language-Swift">let loadNewCommand = loadDataProperty
+  .filter { $0 } // true 进入下一步， false 过滤
+  .asDriver { _ -&gt; Driver&lt;Bool&gt; in // 当成一次 driver 信号
+    return Driver.just(true)
+  }
+  .flatMap { [weak self] _ -&gt; Driver&lt;[UserActivity]&gt; in // 内部请求网络数据(异步)
+    guard let `self` = self else { return Driver&lt;[UserActivity]&gt;.just([]) }
+    return self.queryNewData()
+  }
+  .flatMap { [weak self] items -&gt; Driver&lt;XTRecommendViemModel.EditeDataCommand&gt; in 
+       // 根据数据的结果发送 刷新状态
+    self?.refreshStauts.accept(.endHeaderRefresh)
+    self?.refreshStauts.accept(.showFooter)
+    // 将结果转换为 command 命令
+    return Driver.just(EditeDataCommand.loadNewData(items: items))
+  }</code></pre>
+<p>同样的 <code>loadMoreCommand</code>,</p>
+<pre><code class="line-numbers language-Swift">let loadMoreCommand = loadDataProperty
+  .filter { !$0 } // 为 false 表示加载更多
+  .asDriver { _ in Driver.just(true) }
+  // 内部发送网络请求(异步)
+  .flatMap { [weak self] _ -&gt; Driver&lt;[UserActivity]&gt; in
+    guard let `self` = self else { return Driver&lt;[UserActivity]&gt;.just([]) }
+    // 这里可以发送当前网络请求的状态 类似于 刷新状态的控制
+    return self.queryNextPageData()
+  }
+  .flatMap { [weak self] items -&gt; Driver&lt;XTRecommendViemModel.EditeDataCommand&gt; in
+    // 判断 items 和 noNext 字段
+    // 选择 hiddendFooter, endFooterRefresh, endFooterRefreshWithNoData
+    self?.refreshStauts.accept(.endFooterRefresh)
+    // 转换为 command 消息
+    return Driver.just(EditeDataCommand.loadOldData(items: items))
+  }</code></pre>
+<p>然后是把这两个 <code>command</code> 的 <code>stream</code> 进行合并<br>先把 <code>loadNew</code> 和 <code>loadMore</code> 通过 <code>merge</code> 操作符进行合并，在通过 <code>scan</code> 操作符将每次产生的每次产生的 <code>command</code> 枚举值与 <code>initialWrappedModel</code> 进行匹配 <code>execute(command:)</code> 迭代 <code>wrappedModel</code>， 在通过 <code>map</code> 方法把 <code>wrappedModel</code> 中的 <code>items</code> 转换为 <code>SectionModel</code></p>
+<pre><code class="line-numbers language-Swift">let dataSource = Driver.of(loadNewCommand, loadMoreCommand)
+  .merge()
+  .scan(initialWrappedModel) { (resultWrapped: RecommendWrappedModel, command: EditeDataCommand) -&gt; RecommendWrappedModel in
+    return resultWrapped.execute(command: command)
+  }
+  .map { wrappedModel -&gt; [SectionModel&lt;String, UserActivity&gt;] in
+    return [SectionModel(model: &quot;XTRemSectionModel&quot;, items: wrappedModel.items)]
+  }
+return dataSource</code></pre>
+<p>最终生成了 <code>VC</code> 所需要的数据源.</p>
+<h3 id="对-MJRefresh-的-Rx-拓展"><a href="#对-MJRefresh-的-Rx-拓展" class="headerlink" title="# 对 MJRefresh 的 Rx 拓展"></a># 对 MJRefresh 的 Rx 拓展</h3><pre><code class="line-numbers language-Swift">private var kRxRefreshCommentKey: UInt8 = 0
+
+public extension Reactive where Base: MJRefreshComponent {
+  var refreshing: ControlEvent&lt;Void&gt; {
+    let source: Observable&lt;Void&gt; = lazyInstanceObservable(&amp;kRxRefreshCommentKey) { () -&gt; Observable&lt;()&gt; in
+      Observable.create { [weak control = self.base] observer in
+        if let control = control {
+          control.refreshingBlock = {
+            observer.on(.next(()))
+          }
+        } else {
+          observer.on(.completed)
+        }
+        return Disposables.create()
+      }
+      .takeUntil(self.deallocated)
+      .share(replay: 1)
+    }
+    return ControlEvent(events: source)
+  }
+
+  private func lazyInstanceObservable&lt;T: AnyObject&gt;(_ key: UnsafeRawPointer, createCachedObservable: () -&gt; T) -&gt; T {
+    if let value = objc_getAssociatedObject(self.base, key) as? T {
+      return value
+    }
+    let observable = createCachedObservable()
+    objc_setAssociatedObject(self.base, key, observable, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+    return observable
+  }
+}</code></pre>
+<p>这里是模仿 <code>RxCocoa</code> 对 <code>UIBarButton</code> 进行的拓展，目的是放置类似于一个 <code>header.rx</code> 被重复订阅，导致每次都生成一个 <code>Observer</code> 使前面的订阅不起效果。</p>
+<h3 id="对刷新状态的控制"><a href="#对刷新状态的控制" class="headerlink" title="# 对刷新状态的控制"></a># 对刷新状态的控制</h3><pre><code class="line-numbers language-Swift">public enum RefreshStatus {
+  case none, begainHeaderRefresh, endHeaderRefresh
+  case hiddendFooter, showFooter, endFooterRefresh, endFooterRefreshWithNoData
+}
+
+public protocol Refreshable {
+  var refreshStauts: BehaviorRelay&lt;RefreshStatus&gt; { get }
+}
+
+public extension Refreshable {
+  func refreshStatusBind(to scrollView: UIScrollView) -&gt; Disposable {
+    return refreshStauts.subscribe(onNext: { [weak scrollV = scrollView] status in
+      switch status {
+      case .none:
+        break
+      case .begainHeaderRefresh:
+        scrollV?.mj_header?.beginRefreshing()
+      case .endHeaderRefresh:
+        scrollV?.mj_header?.endRefreshing()
+      case .hiddendFooter:
+        scrollV?.mj_footer?.isHidden = true
+      case .showFooter:
+        scrollV?.mj_footer?.isHidden = false
+      case .endFooterRefresh:
+        scrollV?.mj_footer?.endRefreshing()
+      case .endFooterRefreshWithNoData:
+        scrollV?.mj_footer?.endRefreshingWithNoMoreData()
+      }
+    })
+  }
+}</code></pre>
+<p>在 <code>XTRecommendViemModelInputs</code> 中作如下修改</p>
+<pre><code class="line-numbers language-Swift">protocol XTRecommendViemModelInputs: Refreshable</code></pre>
+<p>就可以直接在 <code>VC</code> 中通过如下调用</p>
+<pre><code>viewModel.inputs.refreshStatusBind(to: self.tableView).disposed(by: disposeBag)</code></pre><p>来控制 <code>tableView</code>刷新状态。</p>
+<p>类似的还可以添加空数据展示视图等。</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="# 总结"></a># 总结</h3><p>本 <code>demo</code> 还有很多可以改进的地方 </p>
+<ul>
+<li><code>tableView</code> 的数据源现在存在两份， 一份是 <code>viewModel</code> 中，一份是 <code>RxTableViewReloadDataSource</code> 中，在改的话会将 <code>ViewModel</code> 中混入 <code>View</code> 的管理所以，我在这并没有将 <code>tableView</code> 的 <code>dataSource</code> 设置为 <code>viewModel</code>；</li>
+<li><code>cell</code> 没有对用的 <code>ViewModel</code> </li>
+</ul>
+<p>最后给出完整版本的链接，接口是不可能暴露出来的👺，用的是本地数据啦，想要真实数据，自己想办法喽，毕竟这只是一次练手项目😶。</p>
+<p><a href="https://github.com/gitKun/Xitu" target="_blank" rel="noopener">demo</a></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/05/02/SwiftUI%E4%B8%ADNavigationView%E7%9A%84BUG/" rel="prev" title="SwiftUI中NavigationView的问题">
+      <i class="fa fa-chevron-left"></i> SwiftUI中NavigationView的问题
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#代码展示"><span class="nav-number">1.</span> <span class="nav-text"># 代码展示</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ViewModel-的解析"><span class="nav-number">2.</span> <span class="nav-text"># ViewModel 的解析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#对-MJRefresh-的-Rx-拓展"><span class="nav-number">3.</span> <span class="nav-text"># 对 MJRefresh 的 Rx 拓展</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#对刷新状态的控制"><span class="nav-number">4.</span> <span class="nav-text"># 对刷新状态的控制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-number">5.</span> <span class="nav-text"># 总结</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">CodingKun</p>
+  <div class="site-description" itemprop="description">喜欢新技术，为了更好地自己努力工作！</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">10</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">categories</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">CodingKun</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> v4.2.0
+  </div>
+
+<script src="/js/prism/prism.js" async></script>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      访客数<span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>人数
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      总访问量<span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>次
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/medium-zoom@1/dist/medium-zoom.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
